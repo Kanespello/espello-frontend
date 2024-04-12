@@ -16,6 +16,7 @@ import "@fontsource/exo-2/800.css"; // Specify weight
 import "@fontsource/exo-2/800-italic.css"; // Specify weight and style
 import "@fontsource/exo-2/900.css"; // Specify weight
 import "@fontsource/exo-2/900-italic.css";
+
 import FeatureComponent from "./components/Home/Feature";
 import ChatBot from "./components/ChatBot";
 

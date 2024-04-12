@@ -1,35 +1,78 @@
-import React, {useEffect, useState} from 'react'
-import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition';
+import React, {useEffect, useState} from 'react';
 import './chat-bot.css'
 
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
 const ChatBot = () => {
-    const {transcript, resetTranscript} = useSpeechRecognition();
-    const [transcriptInput, setTranscriptInput] = useState<string>();
+    const [spokenText, setSpokenText] = useState<string>('');
+    const [transcript, setTranscript] = useState<string>('');
+    const [listening, setListening] = useState<boolean>(false);
 
     useEffect(() => {
-        setTranscriptInput(transcript);
-    }, [transcript])
+        let tempTranscript = '';
 
-    const startListening = () => {
-        SpeechRecognition.startListening({continuous: true})
-            .catch(error => {
-                console.error('Error starting speech recognition:', error);
-            });
+        recognition.lang = 'en-US';
+        recognition.continuous = true;
+        recognition.interimResults = true;
+
+        recognition.onstart = () => {
+            setTranscript('');
+            tempTranscript = '';
+        };
+
+        recognition.onresult = (event) => {
+            const last = event.results.length - 1;
+            tempTranscript = event.results[last][0].transcript;
+            setTranscript(tempTranscript);
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            setListening(false);
+        };
+
+        recognition.onend = () => {
+            setListening(false);
+            setTranscript(tempTranscript);
+        };
+
+        return () => {
+            recognition.abort();
+        };
+    }, []);
+
+    const onChangeTranscript = (event: any) => {
+        setTranscript(event.target.value);
+    }
+
+    const toggleListening = () => {
+        if (listening) {
+            recognition.stop();
+        } else {
+            recognition.start();
+        }
+        setListening(!listening);
     };
 
-    const stopListening = () => {
-        SpeechRecognition.stopListening()
-            .then(() => {
-                resetTranscript();
-            })
-            .catch(error => {
-                console.error('Error starting speech recognition:', error);
-            });
-    }
+    useEffect(() => {
+        const text = "Alright. I would like to understand more about operating model of the client.\nDoes our client manufacture the biscuits as well?";
+        const utterance = new SpeechSynthesisUtterance(text);
 
-    function onChangeTranscriptInput(e: any) {
-        setTranscriptInput(e.target.value);
-    }
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+
+        utterance.onboundary = (event) => {
+            const spokenWord = text.slice(0, event.charIndex + event.charLength);
+            setSpokenText(spokenWord);
+        };
+
+        window.speechSynthesis.speak(utterance);
+
+        return () => {
+            window.speechSynthesis.cancel(); // Cancel speech synthesis when component unmounts
+        };
+    }, []);
 
     return (<React.Fragment>
         <div className="chat-bot-container">
@@ -64,13 +107,12 @@ const ChatBot = () => {
             <div className="chat-bot-container-main">
                 <div className="chat-bot-container-main-transcript">
                     <div className="chat-bot-container-main-transcript-content">
-                        <p>Alright.
-                            I would like to understand more about operating model of the client.
-                            Does our client manufacture the biscuits as well?</p>
+                        <p>{spokenText}</p>
                     </div>
                 </div>
                 <div className="chat-bot-container-main-icon">
-                    <svg className="chat-bot-container-main-icon-content" xmlns="http://www.w3.org/2000/svg" width="72"
+                    <svg className="chat-bot-container-main-icon-content" xmlns="http://www.w3.org/2000/svg"
+                         width="72"
                          height="18" viewBox="0 0 72 18" fill="none">
                         <rect x="0.513153" width="18" height="18" rx="9" fill="#6E6E6E"/>
                         <rect x="27" width="18" height="18" rx="9" fill="#6E6E6E"/>
@@ -79,10 +121,14 @@ const ChatBot = () => {
                 </div>
                 <div className="chat-bot-container-main-user">
                     <div className="chat-bot-container-main-user-field">
-                        <input className="chat-bot-container-main-user-field-input" value={transcriptInput}
-                               onChange={onChangeTranscriptInput}/>
+                        <textarea
+                            className="chat-bot-container-main-user-field-input"
+                            value={transcript}
+                            onChange={onChangeTranscript}
+                            rows={1} // Set the initial number of visible rows
+                        />
                     </div>
-                    <div className="chat-bot-container-main-user-button" onClick={startListening}>
+                    <div className="chat-bot-container-main-user-button" onClick={toggleListening}>
                         <div className="chat-bot-container-main-user-button-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -104,7 +150,7 @@ const ChatBot = () => {
                             <span>AUDIO</span>
                         </div>
                     </div>
-                    <div className="chat-bot-container-main-user-button" onClick={stopListening}>
+                    <div className="chat-bot-container-main-user-button">
                         <div className="chat-bot-container-main-user-button-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -123,7 +169,7 @@ const ChatBot = () => {
                 </div>
             </div>
         </div>
-    </React.Fragment>)
+    </React.Fragment>);
 }
 
 export default ChatBot;
