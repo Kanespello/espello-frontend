@@ -1,8 +1,10 @@
 import React from "react";
 import './feature.css'
+import Header from "../../Header";
 const FeatureComponent = () => {
     return (
         <React.Fragment>
+            <Header/>
             <div className="box-1">
                 <div className="box-1-inner-top">
                     <div className="box-1-inner-top-inner">

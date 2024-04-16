@@ -19,15 +19,19 @@ import "@fontsource/exo-2/900-italic.css";
 
 import FeatureComponent from "./components/Home/Feature";
 import UserInteract from "./components/UserIntract";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import NotFound from "./components/NotFound";
 
 function App() {
-    return (
-        <div className="container">
-            {/*<Header/>*/}
-            {/*<FeatureComponent/>*/}
-            <UserInteract/>
-        </div>
-    );
+    return (<div className="container">
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<FeatureComponent/>}/>
+                <Route path="userInteract" element={<UserInteract/>}/>
+                <Route path="/*" element={<NotFound/>}/>
+            </Routes>
+        </BrowserRouter>
+    </div>);
 }
 
 export default App;
