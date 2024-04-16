@@ -22,6 +22,7 @@
   },
   "scripts": {
     "start": "cp .env.development .env && NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "prod": "cp .env.development .env && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
