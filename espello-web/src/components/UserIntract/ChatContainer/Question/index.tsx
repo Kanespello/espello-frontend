@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Transcript} from "../../../../model/Transcript";
 
+const SERVICE_URL = process.env.REACT_APP_SERVICE_URL;
+
 const Question = () => {
     const [espelloTranscript, setEspelloTranscript] = useState<string>('');
 
@@ -9,7 +11,7 @@ const Question = () => {
     useEffect(() => {
         const fetchTranscript = async (): Promise<string> => {
             try {
-                const response: Response = await fetch('http://20.193.152.154:9033/session/api/v1/getTranscript?sessionId=' + sessionId);
+                const response: Response = await fetch(`${SERVICE_URL}/session/api/v1/getTranscript?sessionId=${sessionId}`);
                 const data: Transcript = await response.json();
                 return data?.data?.conversationTuples[0]?.interviewerText;
             } catch (error) {

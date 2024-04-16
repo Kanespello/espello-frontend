@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header";
 
 import "@fontsource/raleway"; // Defaults to weight 400
 import "@fontsource/raleway/700.css"; // Specify weight
