@@ -18,14 +18,14 @@ import "@fontsource/exo-2/900.css"; // Specify weight
 import "@fontsource/exo-2/900-italic.css";
 
 import FeatureComponent from "./components/Home/Feature";
-import ChatBot from "./components/ChatBot";
+import UserInteract from "./components/UserIntract";
 
 function App() {
     return (
         <div className="container">
             {/*<Header/>*/}
             {/*<FeatureComponent/>*/}
-            <ChatBot/>
+            <UserInteract/>
         </div>
     );
 }
