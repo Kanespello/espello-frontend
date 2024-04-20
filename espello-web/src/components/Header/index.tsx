@@ -26,7 +26,10 @@ function Header() {
         </div>
         <div className="header-right">
             <div className="header-right-buttons" onClick={onClickLoginButton}>
-                <div className="header-right-buttons-login">Login</div>
+                <div className="header-right-buttons-enterprise">Enterprises</div>
+            </div>
+            <div className="header-right-buttons" onClick={onClickLoginButton}>
+                <div className="header-right-buttons-login">Join the waitlist</div>
             </div>
         </div>
     </div>);
