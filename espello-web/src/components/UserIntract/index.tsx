@@ -6,7 +6,7 @@ import { Thread } from '../../model/Thread';
 import { ConversationTurn } from '../../model/ConversationTurn';
 import { ConversationTurnContextModel } from '../../model/ConversationTurnContextModel';
 
-const SERVICE_URL = "http://20.193.152.154:9031";
+const SERVICE_URL = "https://20.193.152.154:9031";
 
 const initialConversationTurn: ConversationTurnContextModel = {
     conversationTurn: ConversationTurn.WAITING,

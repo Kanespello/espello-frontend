@@ -17,7 +17,7 @@ const ChatContainer: FC<ChatContainerProps> = ({ threadId, conversationContext})
 
 
     const sendIntervieweeResponse = async (intervieweeText: string) => {
-        const url = 'http://20.193.152.154:9031/process_text';
+        const url = 'https://20.193.152.154:9031/process_text';
         const data = {
             message: intervieweeText,
             thread_id: threadId
