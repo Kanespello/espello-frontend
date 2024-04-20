@@ -6,7 +6,7 @@ import { Thread } from '../../model/Thread';
 import { ConversationTurn } from '../../model/ConversationTurn';
 import { ConversationTurnContextModel } from '../../model/ConversationTurnContextModel';
 
-const SERVICE_URL = "https://espello.co/java_service";
+const SERVICE_URL = "https://espello.co/python_service";
 
 const initialConversationTurn: ConversationTurnContextModel = {
     conversationTurn: ConversationTurn.WAITING,
