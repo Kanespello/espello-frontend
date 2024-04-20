@@ -102,6 +102,7 @@
     align-items: center;
     gap: 32px;
     flex: 1 0 0;
+    max-height: calc(90vh - 80px);
 }
 
 .chat-bot-container-main-transcript{
@@ -191,3 +192,10 @@
     letter-spacing: 0.48px;
     text-transform: uppercase;
 }
+
+
+@keyframes wave {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+  }

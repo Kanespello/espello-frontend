@@ -21,7 +21,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "cp .env.development .env && NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "start": "react-scripts start",
     "prod": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

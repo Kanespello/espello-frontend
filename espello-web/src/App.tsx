@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 import "@fontsource/raleway"; // Defaults to weight 400
@@ -22,15 +22,17 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import NotFound from "./components/NotFound";
 
 function App() {
+
     return (<div className="container">
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<FeatureComponent/>}/>
-                <Route path="userInteract" element={<UserInteract/>}/>
+                <Route path="/userInteract" element={<UserInteract/>}/>
                 <Route path="/*" element={<NotFound/>}/>
             </Routes>
         </BrowserRouter>
     </div>);
+    
 }
 
 export default App;
