@@ -12,6 +12,8 @@
     flex-direction: column;
     align-items: center;
     align-self: stretch;
+    z-index: 100;
+    background: #121212;
 }
 
 .chat-bot-container-header-main{
@@ -130,6 +132,15 @@
     width: 800px;
 }
 
+.chat-bot-container-main-gradiant{
+    width: 100%;
+height: 115px;
+position: absolute;
+left: 240px;
+top: 84px;
+background: linear-gradient(0deg, rgba(18, 18, 18, 0.00) 0%, #121212 79.72%);
+}
+
 .chat-bot-container-main-transcript-content{
     width: 800px;
     color: #6E6E6E;
@@ -193,6 +204,16 @@
     text-transform: uppercase;
 }
 
+@keyframes decreaseHeight {
+    0% { transform: scaleY(1); }
+    50% { transform: scaleY(0.5); }
+    100% { transform: scaleY(1); }
+  }
+  
+  #rect1, #rect2, #rect3 {
+    animation: decreaseHeight 2s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
 
 @keyframes wave {
     0% { transform: translateY(0); }

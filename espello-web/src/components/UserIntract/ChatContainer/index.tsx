@@ -1,7 +1,7 @@
 import Question from "./Question";
 import Loader from "./Loader";
 import Answer from "./Answer";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { InterviewerResponse } from "../../../model/InterviewerResponse";
 import { ConversationTurnContextModel } from "../../../model/ConversationTurnContextModel";
 
@@ -14,6 +14,10 @@ export interface ChatContainerProps {
 const ChatContainer: FC<ChatContainerProps> = ({ threadId, conversationContext}) => {
 
     const [interviewerText, setInterviewerText] = useState<string>('');
+
+    useEffect(()=>{
+        setInterviewerText('Hi. Can you please introduce yourself? Maybe tell about your work experience.')
+    },[])
 
 
     const sendIntervieweeResponse = async (intervieweeText: string) => {
@@ -63,6 +67,9 @@ const ChatContainer: FC<ChatContainerProps> = ({ threadId, conversationContext})
                 sendIntervieweeResponse={sendIntervieweeResponse}
                 conversationContext={conversationContext}
             />
+            <div  className="chat-bot-container-main-gradiant">
+
+            </div>
         </div>
     )
 }

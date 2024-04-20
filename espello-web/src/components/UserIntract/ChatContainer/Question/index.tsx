@@ -13,7 +13,7 @@ export interface QuestionProps {
 
 const Question: FC<QuestionProps> = ({ threadId,interviewertext,setInterviewerText,conversationContext }) => {
 
-    const [espelloTranscript, setEspelloTranscript] = useState<string>(interviewertext);
+    const [espelloTranscript, setEspelloTranscript] = useState<string>('');
 
     const callSpeakSynthesiser = (transcript: string): void => {
 
@@ -36,9 +36,6 @@ const Question: FC<QuestionProps> = ({ threadId,interviewertext,setInterviewerTe
     };
 
     useEffect(() => {
-        
-        if(interviewertext?.length === 0)
-            interviewertext = 'Hi. Can you please introduce yourself? Maybe tell about your work experience.'
 
         // Speak only when the component mounts
         callSpeakSynthesiser(interviewertext);
