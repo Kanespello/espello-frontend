@@ -15,18 +15,17 @@ import "@fontsource/exo-2/800.css"; // Specify weight
 import "@fontsource/exo-2/800-italic.css"; // Specify weight and style
 import "@fontsource/exo-2/900.css"; // Specify weight
 import "@fontsource/exo-2/900-italic.css";
-
-import FeatureComponent from "./components/Home/Feature";
 import UserInteract from "./components/UserIntract";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import NotFound from "./components/NotFound";
+import Home from './components/Home';
 
 function App() {
 
     return (<div className="container">
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<FeatureComponent/>}/>
+                <Route path="/" element={<Home/>}/>
                 <Route path="/userInteract" element={<UserInteract/>}/>
                 <Route path="/*" element={<NotFound/>}/>
             </Routes>
