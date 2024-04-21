@@ -1,14 +1,20 @@
 import './index.css'
 
 const WhatWeDo = () => {
+    const videoId = 'LUVxxZRfF4I'
     return (
         <div className="box-2">
             <div className="box-2-media">
                 <div className="box-2-media-left">
-                    <video width="560" height="315" controls>
-                        <source src={"/videos/espello_demo.mp4"} type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
+                            <iframe
+                    width="560"
+                    height="315"
+                    src={`https://www.youtube.com/embed/${videoId}`}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    frameBorder="0"
+                    allowFullScreen
+                ></iframe>
                 </div>
                 <div className="box-2-media-right">
                     <div className="box-2-media-right-heading">
