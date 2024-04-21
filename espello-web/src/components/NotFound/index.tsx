@@ -3,7 +3,6 @@ import React from "react";
 
 const NotFount = () => {
     return (<>
-        <Header/>
         <div className="box-1">
         </div>
         <div className="box-2">

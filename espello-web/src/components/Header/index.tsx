@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './header.css';
 
-function Header() {
+interface HeaderProps{
+    scrollToCompnent : () => void
+}
+
+const Header : FC<HeaderProps> = ({scrollToCompnent}) => {
 
     const navigate = useNavigate();
 
-    const onClickLoginButton = () => {
-        navigate('/Login');
+    const onClickEnterprise = () => {
+        scrollToCompnent();
     };
 
     const onClickLogo = () => {
@@ -25,10 +29,10 @@ function Header() {
             <div className="header-left-logo" onClick={onClickLogo}>Espello</div>
         </div>
         <div className="header-right">
-            <div className="header-right-buttons" onClick={onClickLoginButton}>
+            <div className="header-right-buttons" onClick={onClickEnterprise}>
                 <div className="header-right-buttons-enterprise">Enterprises</div>
             </div>
-            <div className="header-right-buttons" onClick={onClickLoginButton}>
+            <div className="header-right-buttons" onClick={onClickLogo}>
                 <div className="header-right-buttons-login">Join the waitlist</div>
             </div>
         </div>

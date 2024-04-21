@@ -1,8 +1,12 @@
+import { FC, RefObject } from 'react';
 import './index.css'
 
-const EnterpriseForm = () => {
+interface EnterpriseFormProps{
+    targetRef : RefObject<HTMLDivElement>
+}
+const EnterpriseForm :FC<EnterpriseFormProps> = ({targetRef}) => {
     return (
-        <div className='enterprise-form'>
+        <div className='enterprise-form' ref={targetRef}>
             <div className='enterprise-form-1'>
                 <div className='enterprise-form-1-1'>Enterprises</div>
                 <div className='enterprise-form-1-2'></div>
@@ -32,7 +36,7 @@ const EnterpriseForm = () => {
                     </div>
                     <div className='enterprise-form-2-1-2'>
                         <div className='enterprise-form-2-1-2-requirements'>
-                            <input className='enterprise-form-2-1-2-requirements-content' placeholder='requirements*' />
+                            <input className='enterprise-form-2-1-2-requirements-content' placeholder='requirements' />
                         </div>
                     </div>
                     <div className='enterprise-form-2-1-3'>
