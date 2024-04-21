@@ -6,3 +6,8 @@ body{
     width: 1280px;
     margin: 0 auto;
 }
+
+::selection {
+    background: #FF8371;
+    color: #F4EAE7;
+  }

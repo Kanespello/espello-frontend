@@ -1,0 +1,190 @@
+.enterprise-form {
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.enterprise-form-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.enterprise-form-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.enterprise-form-1-1 {
+    color: var(--Background---Light, #F4EAE7);
+    text-align: center;
+    font-family: Raleway;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: uppercase;
+    align-self: stretch;
+}
+
+.enterprise-form-1-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.enterprise-form-1-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.enterprise-form-1-4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.enterprise-form-1-4-top,
+.enterprise-form-1-4-bottom {
+    display: flex;
+    padding: 4px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 0px solid var(--Grey, #6E6E6E);
+    background: var(--Dark-Grey, #1D1D1D);
+}
+
+.enterprise-form-1-4-top-content,
+.enterprise-form-1-4-bottom-content {
+    color: var(--Grey, #6E6E6E);
+    text-align: center;
+    font-family: "Exo 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.28px;
+    text-transform: uppercase;
+}
+
+.enterprise-form-2-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.enterprise-form-2-1-1 {
+    display: flex;
+    width: 726px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    width: 726px;
+}
+
+.enterprise-form-2-1-2 {
+
+    width: 726px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--Grey, #6E6E6E);
+    background: var(--Dark-Grey, #1D1D1D);
+}
+
+.enterprise-form-2-1-left,
+.enterprise-form-2-1-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 0 0;
+    border-bottom: 1px solid var(--Grey, #6E6E6E);
+    background: var(--Dark-Grey, #1D1D1D);
+}
+
+.enterprise-form-2-1-left-email,
+.enterprise-form-2-1-left-phone {
+    display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+}
+
+.enterprise-form-2-1-left-email-content,
+.enterprise-form-2-1-left-phone-content,
+.enterprise-form-2-1-2-requirements-content {
+    width: 100%;
+    height: 100%;
+    flex: 1 0 0;
+    color: var(--Grey, #6E6E6E);
+    background: var(--Dark-Grey, #1D1D1D);
+    font-family: "Exo 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    outline: none;
+    /* 137.5% */
+}
+
+.enterprise-form-2-1-2-requirements {
+    display: flex;
+    width: 726px;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.enterprise-form-2-1-3 {
+    display: flex;
+    padding: 12px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--Grey, #6E6E6E);
+}
+
+.enterprise-form-2-1-3-button {
+    width: 74px;
+    color: var(--Grey, #6E6E6E);
+    text-align: center;
+    font-family: "Exo 2";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.48px;
+    text-transform: uppercase;
+}
+
+.enterprise-form-2-1-3-button:hover {
+    color: var(--Highlight, #FF8371);
+    cursor: pointer;
+}

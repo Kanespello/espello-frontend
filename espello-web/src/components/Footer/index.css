@@ -1,0 +1,34 @@
+.footer {
+    display: flex;
+    width: 1200px;
+    padding: 96px 40px;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--Dark-Grey, #1D1D1D);
+    margin: 40px 0 0 0
+}
+
+.footer-left {
+    color: var(--Background---Light, #F4EAE7);
+    text-align: center;
+    font-family: Raleway;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.footer-right{
+    color: var(--Background---Light, #F4EAE7);
+    text-align: center;
+    font-family: "Exo 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.footer-right:hover{
+    color: var(--Highlight, #FF8371);
+    cursor: pointer;
+}
