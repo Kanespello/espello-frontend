@@ -15,6 +15,7 @@ const Header : FC<HeaderProps> = ({scrollToCompnent}) => {
     };
 
     const onClickLogo = () => {
+        console.log("habdjajk");
         navigate('/');
     };
 
