@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './header.css';
 
 interface HeaderProps{
-    scrollToCompnent : () => void
+    scrollToCompnent? : () => void
 }
 
 const Header : FC<HeaderProps> = ({scrollToCompnent}) => {
