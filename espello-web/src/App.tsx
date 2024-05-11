@@ -20,7 +20,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import NotFound from "./components/NotFound";
 import Home from './components/Home';
 import Waitlist from './components/Waitlist';
-import userWaitlist from './components/userWaitlist';
+import UserWaitlist from './components/userWaitlist';
 
 function App() {
 
@@ -29,7 +29,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/userInteract" element={<UserInteract/>}/>
-                <Route path="/userWaitlist" element={<userWaitlist/>}/>
+                <Route path="/userWaitlist" element={<UserWaitlist/>}/>
                 <Route path="/waitlist" element={<Waitlist/>}/>
                 <Route path="/*" element={<NotFound/>}/>
             </Routes>

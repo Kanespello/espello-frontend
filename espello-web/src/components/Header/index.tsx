@@ -15,8 +15,7 @@ const Header : FC<HeaderProps> = ({scrollToCompnent}) => {
     };
 
     const onClickLogo = () => {
-        console.log("habdjajk");
-        navigate('/');
+        navigate('/userWaitlist');
     };
 
     return (<div className="header">
