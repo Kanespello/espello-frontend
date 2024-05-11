@@ -30,11 +30,11 @@ const Header : FC<HeaderProps> = ({scrollToCompnent, disableOtherButtons}) => {
             <div className="header-left-logo" onClick={onClickLogo}>Espello</div>
         </div>
         <div className="header-right">
-            { disableOtherButtons &&
+            { !disableOtherButtons &&
                 <div className="header-right-buttons" onClick={onClickEnterprise}>
                 <div className="header-right-buttons-enterprise">Enterprises</div>
             </div>}
-            { disableOtherButtons &&
+            { !disableOtherButtons &&
             <div className="header-right-buttons" onClick={onClickLogo}>
                 <div className="header-right-buttons-login">Join the waitlist</div>
             </div>}

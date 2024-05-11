@@ -7,7 +7,7 @@ const UserWaitlist=()=>{
 
 	return (
         <div className="w">
-        	<Header scrollToCompnent={scrollFunc} disableOtherButtons = {true}/>
+        	<Header scrollToCompnent={scrollFunc} disableOtherButtons = {false}/>
             <div className="waitlist">
                 <div className="waitlist-frame">
                     <div className="waitlist-frame-input">
