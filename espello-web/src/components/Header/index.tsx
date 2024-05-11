@@ -4,7 +4,7 @@ import './header.css';
 
 interface HeaderProps{
     scrollToCompnent : () => void
-    disableOtherButtons : boolean
+    disableOtherButtons? : boolean
 }
 
 const Header : FC<HeaderProps> = ({scrollToCompnent, disableOtherButtons}) => {
