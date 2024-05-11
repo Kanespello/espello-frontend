@@ -1,5 +1,5 @@
 import { FC } from "react"
-import Header "./components/Header"
+import Header from "../Header";
 
 const UserWaitlist=()=>{
 
