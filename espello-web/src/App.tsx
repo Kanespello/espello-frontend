@@ -20,7 +20,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import NotFound from "./components/NotFound";
 import Home from './components/Home';
 import Waitlist from './components/Waitlist';
-import UserWaitlist from './components/UserWaitlist';
+import UserWaitlist from './components/UserWaitlist/UserWaitlist';
 
 function App() {
 
