@@ -1,3 +1,6 @@
+import { FC } from "react"
+
+
 const UserWaitlist=()=>{
 
 	return (
