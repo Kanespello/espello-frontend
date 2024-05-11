@@ -4,10 +4,10 @@ import './header.css';
 
 interface HeaderProps{
     scrollToCompnent : () => void
-    disableOtherButtons? : boolean
+    enableOtherButtons? : boolean
 }
 
-const Header : FC<HeaderProps> = ({scrollToCompnent, disableOtherButtons}) => {
+const Header : FC<HeaderProps> = ({scrollToCompnent, enableOtherButtons}) => {
 
     const navigate = useNavigate();
 
@@ -30,11 +30,11 @@ const Header : FC<HeaderProps> = ({scrollToCompnent, disableOtherButtons}) => {
             <div className="header-left-logo" onClick={onClickLogo}>Espello</div>
         </div>
         <div className="header-right">
-            { disableOtherButtons &&
+            { enableOtherButtons &&
                 <div className="header-right-buttons" onClick={onClickEnterprise}>
                 <div className="header-right-buttons-enterprise">Enterprises</div>
             </div>}
-            { disableOtherButtons &&
+            { enableOtherButtons &&
             <div className="header-right-buttons" onClick={onClickLogo}>
                 <div className="header-right-buttons-login">Join the waitlist</div>
             </div>}
