@@ -1,4 +1,4 @@
-const userWaitlist=()=>{
+const UserWaitlist=()=>{
 
 	return (
         <div className="w">
@@ -25,4 +25,4 @@ const userWaitlist=()=>{
     )
 }
 
-export default userWaitlist
+export default UserWaitlist
