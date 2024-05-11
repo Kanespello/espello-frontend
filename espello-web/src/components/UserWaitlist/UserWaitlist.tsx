@@ -3,9 +3,11 @@ import Header from "../Header";
 
 const UserWaitlist=()=>{
 
+    const scrollFunc=()=>{}
+
 	return (
         <div className="w">
-        	<Header/>
+        	<Header scrollToCompnent={scrollFunc}/>
             <div className="waitlist">
                 <div className="waitlist-frame">
                     <div className="waitlist-frame-input">
