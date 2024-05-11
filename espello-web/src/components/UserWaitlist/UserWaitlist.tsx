@@ -1,10 +1,11 @@
 import { FC } from "react"
-
+import Header "./components/Header"
 
 const UserWaitlist=()=>{
 
 	return (
         <div className="w">
+        	<Header/>
             <div className="waitlist">
                 <div className="waitlist-frame">
                     <div className="waitlist-frame-input">
