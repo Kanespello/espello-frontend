@@ -1,0 +1,20 @@
+
+
+.user-waitlist-frame-input{
+    display: flex;
+width: 726px;
+padding: 16px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+}
+
+.user-waitlist-frame-input-content{
+
+color: var(--Background---Light, #F4EAE7);
+font-family: "Exo 2";
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: 22px; /* 91.667% */
+}

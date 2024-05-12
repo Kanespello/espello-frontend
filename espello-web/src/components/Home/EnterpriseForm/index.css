@@ -188,3 +188,9 @@
     color: var(--Highlight, #FF8371);
     cursor: pointer;
 }
+
+.enterprise-form-success-message {
+    color: var(--Highlight, #FF8371);
+    font-size: 16px;
+    margin-top: 10px;
+}

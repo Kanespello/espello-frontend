@@ -11,8 +11,8 @@ const Waitlist = () => {
                     <div className="waitlist-frame-button">
                         <div className="waitlist-frame-button-logo">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                                <path d="M12.5625 5.74976L19.3125 12.4998L12.5625 19.2498" stroke="#FF8371" stroke-width="1.50251" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M18.375 12.4999H4.6875" stroke="#FF8371" stroke-width="1.50251" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M12.5625 5.74976L19.3125 12.4998L12.5625 19.2498" stroke="#FF8371" strokeWidth="1.50251" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M18.375 12.4999H4.6875" stroke="#FF8371" strokeWidth="1.50251" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
                         <div className="waitlist-frame-button-content">
