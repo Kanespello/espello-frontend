@@ -127,7 +127,8 @@
 }
 
 .enterprise-form-2-1-left-email,
-.enterprise-form-2-1-left-phone {
+.enterprise-form-2-1-left-phone,
+.enterprise-form-2-1-2-requirements {
     display: flex;
     padding: 16px;
     justify-content: center;

@@ -58,7 +58,6 @@ const ChatContainer: FC<ChatContainerProps> = ({ threadId, conversationContext})
                 threadId={threadId}
                 interviewertext={interviewerText}
                 setInterviewerText={setInterviewerText}
-
                 conversationContext={conversationContext}
             />
             <Loader
