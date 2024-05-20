@@ -1,6 +1,6 @@
 import React from "react";
-import './feature.css'
-import Header from "../../Header";
+import './index.css'
+
 const FeatureComponent = () => {
     return (
         <React.Fragment>

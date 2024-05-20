@@ -32,16 +32,33 @@
     height: 19.5px;
 }
 
+.header-left-logo,
+.header-right-buttons-login,
+.header-right-buttons-enterprise {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
 .header-left-logo {
     color: var(--Highlight, #FF8371);
-    text-align: center;
     font-family: Raleway;
-    font-size: 16px;
     font-style: normal;
-    font-weight: 800;
-    line-height: normal;
     letter-spacing: 1.28px;
-    text-transform: uppercase;
+}
+
+.header-right-buttons-login,
+.header-right-buttons-enterprise {
+    color: var(--Grey, #6E6E6E);
+    font-family: "Exo 2";
+}
+
+.header-right-buttons-login:hover,
+.header-right-buttons-enterprise:hover {
+    color: var(--Highlight, #FF8371);
+    cursor: pointer;
 }
 
 .header-right-buttons {
@@ -51,23 +68,5 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    border: 0px solid var(--Grey, #6E6E6E);
-}
-
-.header-right-buttons-login,
-.header-right-buttons-enterprise {
-    color: var(--Grey, #6E6E6E);
-    text-align: center;
-    font-family: "Exo 2";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    text-transform: uppercase;
-}
-
-.header-right-buttons-login:hover,
-.header-right-buttons-enterprise:hover {
-    color: var(--Highlight, #FF8371);
-    cursor: pointer;
+    border: 0;
 }
