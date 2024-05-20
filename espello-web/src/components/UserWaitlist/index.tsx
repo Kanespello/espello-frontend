@@ -58,7 +58,8 @@ const UserWaitlist = () => {
         <>
             <Header scrollToCompnent={scrollFunc} enableOtherButtons={false} />
             <div className="user-waitlist-frame-input">
-                {!isSuccess ? <>
+                {!isSuccess ? 
+               <div className="user-waitlist-frame-submit">
                     <div className="user-waitlist-frame-input-content-top">
                         <input
                             className="user-waitlist-frame-input-content-left"
@@ -80,7 +81,7 @@ const UserWaitlist = () => {
                             Enter email address to join waitlist
                         </div>
                     }
-                </>
+                </div>
                     :
                     <div className="user-waitlist-frame-submit">
                         <div className="user-waitlist-frame-submit-top">

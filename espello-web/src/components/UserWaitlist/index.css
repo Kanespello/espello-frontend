@@ -1,13 +1,13 @@
 .user-waitlist-frame-input {
+    position: absolute;
+    top: 67px;
     height: calc(100vh - 67px);
     display: flex;
-    width: 726px;
-    margin: 0 auto;
-    padding: 16px;
-    gap: 10px;
+    width: 1280px;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    gap: 305px;
 }
 
 .user-waitlist-frame-submit {
@@ -47,7 +47,6 @@
     align-items: center;
     border-bottom: 1px solid var(--Highlight, #FF8371);
     background: var(--Dark-Grey, #1D1D1D);
-
     width: 726px;
 }
 
