@@ -19,7 +19,6 @@ import UserInteract from "./components/UserIntract";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import NotFound from "./components/NotFound";
 import Home from './components/Home';
-import Waitlist from './components/Waitlist';
 import UserWaitlist from './components/UserWaitlist';
 
 function App() {
@@ -30,7 +29,6 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/userInteract" element={<UserInteract/>}/>
                 <Route path="/userWaitlist" element={<UserWaitlist/>}/>
-                <Route path="/waitlist" element={<Waitlist/>}/>
                 <Route path="/*" element={<NotFound/>}/>
             </Routes>
         </BrowserRouter>
