@@ -191,16 +191,15 @@
     cursor: pointer;
 }
 
-.enterprise-form-success-message,
-.enterprise-form-error-message {
-    font-size: 16px;
-    margin-top: 10px;
-}
-
 .enterprise-form-success-message {
-    color: var(--Highlight, #FF8371);
-}
-
-.enterprise-form-error-message {
-    color: var(--Highlight, #a70505);
+    align-self: stretch;
+    color: var(--Grey, #6E6E6E);
+    text-align: center;
+    font-family: "Exo 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 12px 16px;
+    gap: 8px;
 }

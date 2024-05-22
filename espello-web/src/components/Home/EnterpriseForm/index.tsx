@@ -1,4 +1,4 @@
-import React, { useState, FC, RefObject } from 'react';
+import React, { useState, FC, RefObject, useEffect } from 'react';
 import './index.css';
 
 interface EnterpriseFormProps {
@@ -6,53 +6,50 @@ interface EnterpriseFormProps {
 }
 
 const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [requirements, setRequirements] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [formData, setFormData] = useState({
+        email: '',
+        phone: '',
+        requirements: '',
+    });
 
-    const resetMessages = () => {
-        setTimeout(() => {
-            setSuccessMessage('');
-            setErrorMessage('');
-        }, 2000);
-    }
+    const [message, setMessage] = useState('');
 
-    const resetFields = () => {
-        setEmail('');
-        setPhone('');
-        setRequirements('');
-    }
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMessage('');
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, [message]);
 
     const isValidEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
-    }
+    };
 
     const isValidPhone = (phone: string) => {
         const phoneRegex = /^[0-9]{10,15}$/;
         return phoneRegex.test(phone);
-    }
+    };
 
     const handleSubmit = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         event.preventDefault();
 
+        const { email, phone, requirements } = formData;
+
         if (!isValidEmail(email)) {
-            setErrorMessage('Invalid email address.');
-            resetMessages();
+            setMessage('Invalid email address.');
             return;
         }
 
         if (!isValidPhone(phone)) {
-            setErrorMessage('Invalid phone number.');
-            resetMessages();
+            setMessage('Invalid phone number.');
             return;
         }
 
         const queryParams = new URLSearchParams({
-            email: email,
-            phone: phone,
+            email,
+            phone,
             message: requirements,
             isEnterprise: "true"
         }).toString();
@@ -71,15 +68,21 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
 
             const result = await response.json();
             console.log('Success:', result);
-            setSuccessMessage('Form submitted successfully!');
-            resetMessages();
-            resetFields();
+            setMessage('Thanks for your interest. We will get back to you in 24 hours.');
+            setFormData({ email: '', phone: '', requirements: '' });
 
         } catch (error) {
             console.error('Error:', error);
-            setErrorMessage('Failed to submit form.');
-            resetMessages();
+            setMessage('Failed to submit form.');
         }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
     };
 
     return (
@@ -103,20 +106,22 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
                         <div className='enterprise-form-2-1-left'>
                             <div className='enterprise-form-2-1-left-email'>
                                 <input
+                                    name='email'
                                     className='enterprise-form-2-1-left-email-content'
                                     placeholder='work email*'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={formData.email}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
                         <div className='enterprise-form-2-1-right'>
                             <div className='enterprise-form-2-1-left-phone'>
                                 <input
+                                    name='phone'
                                     className='enterprise-form-2-1-left-phone-content'
                                     placeholder='phone*'
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
+                                    value={formData.phone}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -124,21 +129,23 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
                     <div className='enterprise-form-2-1-2'>
                         <div className='enterprise-form-2-1-2-requirements'>
                             <input
+                                name='requirements'
                                 className='enterprise-form-2-1-2-requirements-content'
                                 placeholder='requirements'
-                                value={requirements}
-                                onChange={(e) => setRequirements(e.target.value)}
+                                value={formData.requirements}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
-                    <div className='enterprise-form-2-1-3'>
-                        <div className='enterprise-form-2-1-3-button' onClick={handleSubmit}>
-                            Submit
+                    {!message && (
+                        <div className='enterprise-form-2-1-3'>
+                            <div className='enterprise-form-2-1-3-button' onClick={handleSubmit}>
+                                Submit
+                            </div>
                         </div>
-                    </div>
+                    )}
+                    {message && <div className="enterprise-form-success-message">{message}</div>}
                 </div>
-                {successMessage && <div className="enterprise-form-success-message">{successMessage}</div>}
-                {errorMessage && <div className="enterprise-form-error-message">{errorMessage}</div>}
             </div>
         </div>
     );
