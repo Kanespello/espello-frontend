@@ -16,8 +16,9 @@ const ChatHeaderTimer: React.FC<ChatHeaderTimerProps> = ({ conversationContext ,
             conversationContext?.changeConversationTurn(ConversationTurn.WAITING);
             setTimerOut(true);
         }
-
+        else
         setTimerOut(false);
+
         const interval = setInterval(() => {
             // Decrease the number of seconds every second
             setSeconds(prevSeconds => Math.max(prevSeconds - 1, 0)); // Ensure seconds doesn't go below 0

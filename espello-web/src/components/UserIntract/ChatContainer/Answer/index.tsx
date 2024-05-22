@@ -23,7 +23,7 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
 
         recognition.lang = 'en-US';
         recognition.continuous = true;
-        recognition.interimResults = true;
+        recognition.interimResults = false;
 
         recognition.onstart = () => {
             setUserTranscript('');
@@ -58,22 +58,23 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
     useEffect(() => {
         if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE && !isUserSpeaking) {
             recognition.start();
-            setIsUserSpeaking(!isUserSpeaking);
+            setIsUserSpeaking(true); // Set isUserSpeaking to true when recognition starts
         }
-    }, [conversationContext?.conversationTurn])
+    }, [conversationContext?.conversationTurn]);
 
     useEffect(() => {
-        if (timerOut)
-            sendResponse()
-    }, [timerOut])
+
+        if (timerOut) {
+            // Call sendResponse function when timerOut becomes true
+            sendResponse();
+        }
+    }, [timerOut]);
 
     const sendResponse = () => {
         recognition.stop();
-        sendIntervieweeResponse(userTranscript)
-        conversationContext?.changeConversationTurn(ConversationTurn.WAITING)
+        sendIntervieweeResponse(userTranscript);
+        conversationContext?.changeConversationTurn(ConversationTurn.WAITING);
     };
-
-
 
     return (
         <div className="chat-bot-container-main-user">
@@ -104,4 +105,4 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
         </div>)
 }
 
-export default Answer
+export default Answer;

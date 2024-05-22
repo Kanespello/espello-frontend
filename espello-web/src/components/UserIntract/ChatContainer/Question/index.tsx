@@ -47,7 +47,9 @@ const Question: FC<QuestionProps> = ({ interviewerText, setInterviewerText, conv
                 <div className="chat-bot-container-main-dialog-box">
                     <div className="chat-bot-container-main-dialog-box-heading">Instructions</div>
                     <div className="chat-bot-container-main-dialog-box-content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        1. Each query must be answered within a 90-second timeframe. <br />
+                        2. It is advisable to use Safari as the browser. <br />
+                        3. In Chrome, the speech recognizer will stop after approximately 10 seconds of silence. <br />
                     </div>
                     <div className="chat-bot-container-main-dialog-box-button" onClick={() => {
                         setIsDialogVisible(false);
