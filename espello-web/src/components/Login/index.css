@@ -8,7 +8,6 @@
     justify-content: center;
     align-items: center;
     gap: 305px;
-    background: var(--Black, #121212);
 }
 
 .user-login-container-inner {
@@ -77,6 +76,7 @@
 
 .user-login-container-inner-left-content-heading2-2 {
     color: var(--Highlight, #FF8371);
+    cursor: pointer;
 }
 
 .user-login-container-inner-left-content-fields {
@@ -88,6 +88,7 @@
 }
 
 .user-login-container-inner-left-content-fields-email,
+.user-login-container-inner-left-content-fields-otp,
 .user-login-container-inner-left-content-fields-password {
     display: flex;
     align-items: center;
@@ -97,6 +98,7 @@
 }
 
 .user-login-container-inner-left-content-fields-email-input,
+.user-login-container-inner-left-content-fields-otp-input,
 .user-login-container-inner-left-content-fields-password-input {
     display: flex;
     justify-content: center;
@@ -107,6 +109,7 @@
 }
 
 .user-login-container-inner-left-content-fields-email-input-content,
+.user-login-container-inner-left-content-fields-otp-input-content,
 .user-login-container-inner-left-content-fields-password-input-content {
     color: var(--Grey, #6E6E6E);
     font-family: "Exo 2";
@@ -119,21 +122,6 @@
     border: none;
 }
 
-.user-login-container-inner-left-content-primary-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 16px;
-    align-self: stretch;
-    background: var(--Highlight, #FF8371);
-    color: var(--Background---Light, #F4EAE7);
-    font-family: "Exo 2";
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.48px;
-    text-transform: uppercase;
-}
-
 .user-login-container-inner-left-content-secondary-buttons {
     display: flex;
     align-items: flex-start;
@@ -141,6 +129,7 @@
     align-self: stretch;
 }
 
+.user-login-container-inner-left-content-primary-button,
 .user-login-container-inner-left-content-secondary-buttons-google,
 .user-login-container-inner-left-content-secondary-buttons-linkedin {
     display: flex;
@@ -154,6 +143,12 @@
     font-weight: 700;
     letter-spacing: 0.48px;
     text-transform: uppercase;
+    cursor: pointer;
+}
+
+.user-login-container-inner-left-content-primary-button {
+    align-self: stretch;
+    background: var(--Highlight, #FF8371);
 }
 
 .user-login-container-inner-left-content-secondary-buttons-google {

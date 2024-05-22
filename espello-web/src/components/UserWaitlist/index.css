@@ -90,3 +90,8 @@
     gap: 10px;
     cursor: pointer;
 }
+.user-waitlist-frame-input-content-right-button{
+    background: none;
+    border: none;
+    color: #FF8371;
+}

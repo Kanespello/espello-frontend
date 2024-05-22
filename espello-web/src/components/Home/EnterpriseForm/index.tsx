@@ -1,5 +1,6 @@
 import React, { useState, FC, RefObject, useEffect } from 'react';
 import './index.css';
+import { API_WAITLIST } from '../../../util/AppConstants';
 
 interface EnterpriseFormProps {
     targetRef: RefObject<HTMLDivElement>;
@@ -17,7 +18,7 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setMessage('');
-        }, 3000);
+        }, 2000);
 
         return () => clearTimeout(timer);
     }, [message]);
@@ -55,7 +56,7 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
         }).toString();
 
         try {
-            const response = await fetch(`https://espello.co/java_service/session/api/v1/joinWaitlist?${queryParams}`, {
+            const response = await fetch(`${API_WAITLIST}?${queryParams}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

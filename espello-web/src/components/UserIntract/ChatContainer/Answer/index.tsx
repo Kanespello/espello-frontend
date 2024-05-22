@@ -1,13 +1,14 @@
-import React, { FC, useContext, useEffect, useMemo, useState } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import { ConversationTurn } from "../../../../model/ConversationTurn";
 import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
 
 export interface AnswerProps {
+    timerOut: boolean;
     sendIntervieweeResponse: (intervieweeText: string) => Promise<void>;
-    conversationContext : ConversationTurnContextModel
+    conversationContext: ConversationTurnContextModel
 }
 
-const Answer: FC<AnswerProps> = ({ sendIntervieweeResponse,conversationContext }) => {
+const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversationContext }) => {
 
     const [userTranscript, setUserTranscript] = useState<string>('');
     const [isUserSpeaking, setIsUserSpeaking] = useState<boolean>(false);
@@ -54,19 +55,25 @@ const Answer: FC<AnswerProps> = ({ sendIntervieweeResponse,conversationContext }
         setUserTranscript(event.target.value);
     }
 
-    useEffect(()=>{
-        if(conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE && !isUserSpeaking)
-         {
+    useEffect(() => {
+        if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE && !isUserSpeaking) {
             recognition.start();
             setIsUserSpeaking(!isUserSpeaking);
-         }
-    },[conversationContext?.conversationTurn])
+        }
+    }, [conversationContext?.conversationTurn])
+
+    useEffect(() => {
+        if (timerOut)
+            sendResponse()
+    }, [timerOut])
 
     const sendResponse = () => {
-            recognition.stop();
-            sendIntervieweeResponse(userTranscript)
-            conversationContext?.changeConversationTurn(ConversationTurn.WAITING)
+        recognition.stop();
+        sendIntervieweeResponse(userTranscript)
+        conversationContext?.changeConversationTurn(ConversationTurn.WAITING)
     };
+
+
 
     return (
         <div className="chat-bot-container-main-user">

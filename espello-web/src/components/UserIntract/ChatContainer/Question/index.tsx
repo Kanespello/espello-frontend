@@ -1,22 +1,19 @@
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ConversationTurn } from "../../../../model/ConversationTurn";
 import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
 
-
-const SERVICE_URL = "https://espello.co/python_service";
-export interface QuestionProps {
-    threadId: string;
-    interviewertext: string;
+interface QuestionProps {
+    interviewerText: string;
     setInterviewerText: React.Dispatch<React.SetStateAction<string>>;
-    conversationContext : ConversationTurnContextModel;
+    conversationContext: ConversationTurnContextModel;
 }
 
-const Question: FC<QuestionProps> = ({ threadId,interviewertext,setInterviewerText,conversationContext }) => {
+const Question: FC<QuestionProps> = ({ interviewerText, setInterviewerText, conversationContext }) => {
 
     const [espelloTranscript, setEspelloTranscript] = useState<string>('');
+    const [isDialogVisible, setIsDialogVisible] = useState<boolean>(true);
 
-    const callSpeakSynthesiser = (transcript: string): void => {
-
+    const speakSynthesizer = (transcript: string): void => {
         conversationContext?.changeConversationTurn(ConversationTurn.INTERVIEWER);
 
         const utterance: SpeechSynthesisUtterance = new window.SpeechSynthesisUtterance(transcript);
@@ -36,21 +33,35 @@ const Question: FC<QuestionProps> = ({ threadId,interviewertext,setInterviewerTe
     };
 
     useEffect(() => {
+        if (interviewerText.length > 0)
+            speakSynthesizer(interviewerText);
 
-        // Speak only when the component mounts
-        callSpeakSynthesiser(interviewertext);
-
-        // Cleanup function to stop speech when the component unmounts
         return () => {
             window.speechSynthesis.cancel();
         };
-    }, [interviewertext]); // Re-run effect when interviewertext changes
+    }, [interviewerText]);
 
-    return (<div className="chat-bot-container-main-transcript">
-        <div className="chat-bot-container-main-transcript-content">
-            <p>{espelloTranscript}</p>
-        </div>
-    </div>)
+    return (
+        <>
+            {isDialogVisible && (
+                <div className="chat-bot-container-main-dialog-box">
+                    <div className="chat-bot-container-main-dialog-box-heading">Instructions</div>
+                    <div className="chat-bot-container-main-dialog-box-content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    </div>
+                    <div className="chat-bot-container-main-dialog-box-button" onClick={() => {
+                        setIsDialogVisible(false);
+                        setInterviewerText('Hi. Can you please introduce yourself? Maybe tell about your work experience.');
+                    }}>Got it</div>
+                </div>
+            )}
+            <div className="chat-bot-container-main-transcript">
+                <div className="chat-bot-container-main-transcript-content">
+                    <p>{espelloTranscript}</p>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default Question;

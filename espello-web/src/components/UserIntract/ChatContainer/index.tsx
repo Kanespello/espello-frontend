@@ -1,32 +1,27 @@
 import Question from "./Question";
 import Loader from "./Loader";
 import Answer from "./Answer";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { InterviewerResponse } from "../../../model/InterviewerResponse";
 import { ConversationTurnContextModel } from "../../../model/ConversationTurnContextModel";
+import { SERVICE_URL_PYTHON } from "../../../util/AppConstants";
 
 export interface ChatContainerProps {
+    timerOut: boolean;
     threadId: string;
     conversationContext: ConversationTurnContextModel
 }
 
-
-const ChatContainer: FC<ChatContainerProps> = ({ threadId, conversationContext}) => {
+const ChatContainer: FC<ChatContainerProps> = ({ timerOut,threadId, conversationContext }) => {
 
     const [interviewerText, setInterviewerText] = useState<string>('');
 
-    useEffect(()=>{
-        setInterviewerText('Hi. Can you please introduce yourself? Maybe tell about your work experience.')
-    },[])
-
-
     const sendIntervieweeResponse = async (intervieweeText: string) => {
-        const url = 'https://espello.co/python_service/process_text';
+        const url = `${SERVICE_URL_PYTHON}/process_text`;
         const data = {
             message: intervieweeText,
             thread_id: threadId
         };
-        console.log(intervieweeText)
 
         try {
             const response = await fetch(url, {
@@ -55,18 +50,18 @@ const ChatContainer: FC<ChatContainerProps> = ({ threadId, conversationContext})
     return (
         <div className="chat-bot-container-main">
             <Question
-                threadId={threadId}
-                interviewertext={interviewerText}
+                interviewerText={interviewerText}
                 setInterviewerText={setInterviewerText}
                 conversationContext={conversationContext}
             />
             <Loader
                 conversationContext={conversationContext} />
             <Answer
+                timerOut={timerOut}
                 sendIntervieweeResponse={sendIntervieweeResponse}
                 conversationContext={conversationContext}
             />
-            <div  className="chat-bot-container-main-gradiant">
+            <div className="chat-bot-container-main-gradiant">
 
             </div>
         </div>

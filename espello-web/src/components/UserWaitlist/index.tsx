@@ -1,26 +1,38 @@
-import { useState } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../Header";
-import './index.css'
+import './index.css';
+import { API_WAITLIST } from "../../util/AppConstants";
 
 const UserWaitlist = () => {
-
     const [email, setEmail] = useState<string>('');
     const [isSuccess, setIsSuccess] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isSuccess) {
+            const timer = setTimeout(() => {
+                navigate('/');
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [isSuccess, navigate]);
 
     const validateEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
 
-    const handleSubmit = async (event: any) => {
+    const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
 
         if (!validateEmail(email)) {
             setError('Please enter a valid email address.');
             setTimeout(() => {
                 setError('');
-            }, 2000)
+            }, 2000);
             return;
         }
 
@@ -32,7 +44,7 @@ const UserWaitlist = () => {
         }).toString();
 
         try {
-            const response = await fetch(`https://espello.co/java_service/session/api/v1/joinWaitlist?${queryParams}`, {
+            const response = await fetch(`${API_WAITLIST}?${queryParams}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,36 +64,36 @@ const UserWaitlist = () => {
         }
     };
 
-    const scrollFunc = () => { }
-
     return (
-        <>
-            <Header scrollToCompnent={scrollFunc} enableOtherButtons={false} />
+        <React.Fragment>
+            <Header scrollToCompnent={() => { }} enableOtherButtons={false} />
             <div className="user-waitlist-frame-input">
-                {!isSuccess ? 
-               <div className="user-waitlist-frame-submit">
-                    <div className="user-waitlist-frame-input-content-top">
-                        <input
-                            className="user-waitlist-frame-input-content-left"
-                            placeholder="name@example.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        ></input>
-                        <div className="user-waitlist-frame-input-content-right" onClick={handleSubmit}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                                <path d="M12.5625 5.74976L19.3125 12.4998L12.5625 19.2498" stroke="#FF8371" stroke-width="1.50251" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M18.375 12.4999H4.6875" stroke="#FF8371" stroke-width="1.50251" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+                {!isSuccess ?
+                    <form className="user-waitlist-frame-submit" onSubmit={handleSubmit}>
+                        <div className="user-waitlist-frame-input-content-top">
+                            <input
+                                className="user-waitlist-frame-input-content-left"
+                                placeholder="name@example.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <button type="submit" className="user-waitlist-frame-input-content-right-button">
+                                <div className="user-waitlist-frame-input-content-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                        <path d="M12.562 5.74977L19.312 12.4998L12.562 19.2498" stroke="#FF8371" stroke-width="1.50251" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M18.3755 12.5H4.68799" stroke="#FF8371" stroke-width="1.50251" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </button>
                         </div>
-                    </div>
-                    {error ?
-                        <div className="user-waitlist-frame-input-content-bottom">{error}</div>
-                        :
-                        <div className="user-waitlist-frame-input-content-bottom">
-                            Enter email address to join waitlist
-                        </div>
-                    }
-                </div>
+                        {error ?
+                            <div className="user-waitlist-frame-input-content-bottom">{error}</div>
+                            :
+                            <div className="user-waitlist-frame-input-content-bottom">
+                                Enter email address to join waitlist
+                            </div>
+                        }
+                    </form>
                     :
                     <div className="user-waitlist-frame-submit">
                         <div className="user-waitlist-frame-submit-top">
@@ -93,7 +105,7 @@ const UserWaitlist = () => {
                     </div>
                 }
             </div>
-        </>
+        </React.Fragment>
     );
 }
 
