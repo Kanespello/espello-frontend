@@ -73,7 +73,7 @@ const UserWaitlist = () => {
                         <div className="user-waitlist-frame-input-content-top">
                             <input
                                 className="user-waitlist-frame-input-content-left"
-                                placeholder="name@example.com"
+                                placeholder="example@gmail.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
