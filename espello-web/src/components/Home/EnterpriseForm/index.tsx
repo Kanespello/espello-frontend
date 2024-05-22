@@ -2,7 +2,7 @@ import React, { useState, FC, RefObject } from 'react';
 import './index.css';
 
 interface EnterpriseFormProps {
-  targetRef: RefObject<HTMLDivElement>;
+    targetRef: RefObject<HTMLDivElement>;
 }
 
 const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
@@ -11,25 +11,25 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
     const [requirements, setRequirements] = useState('');
     const [successMessage, setSuccessMessage] = useState('');  // State for handling success message
 
-    const resetSuccessMessage = () =>{
-        setTimeout(()=>{
+    const resetSuccessMessage = () => {
+        setTimeout(() => {
             setSuccessMessage('');
-        },2000);
+        }, 2000);
     }
 
-    const resetFields = () =>{
+    const resetFields = () => {
         setEmail('');  // Clear email field
         setPhone('');  // Clear phone field
         setRequirements('');  // Clear requirements field
     }
     const handleSubmit = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        event.preventDefault(); 
+        event.preventDefault();
 
         const queryParams = new URLSearchParams({
             email: email,
             phone: phone,
             message: requirements,
-            isEnterprise:"true"
+            isEnterprise: "true"
         }).toString();
 
         try {
@@ -60,7 +60,17 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
     return (
         <div className='enterprise-form' ref={targetRef}>
             <div className='enterprise-form-1'>
-                {/* Other parts of the form */}
+                <div className='enterprise-form-1-1'>Enterprises</div>
+                <div className='enterprise-form-1-2'></div>
+                <div className='enterprise-form-1-3'></div>
+                <div className='enterprise-form-1-4'>
+                    <div className='enterprise-form-1-4-top'>
+                        <div className='enterprise-form-1-4-top-content'>candidate screening tool</div>
+                    </div>
+                    <div className='enterprise-form-1-4-bottom'>
+                        <div className='enterprise-form-1-4-bottom-content'>assessment tool for Product positions</div>
+                    </div>
+                </div>
             </div>
             <div className='enterprise-form-2'>
                 <div className='enterprise-form-2-1'>
@@ -87,13 +97,13 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
                         </div>
                     </div>
                     <div className='enterprise-form-2-1-2'>
-                    <div className='enterprise-form-2-1-2-requirements'>
-                        <input
-                            className='enterprise-form-2-1-2-requirements-content'
-                            placeholder='requirements'
-                            value={requirements}
-                            onChange={(e) => setRequirements(e.target.value)}
-                        />
+                        <div className='enterprise-form-2-1-2-requirements'>
+                            <input
+                                className='enterprise-form-2-1-2-requirements-content'
+                                placeholder='requirements'
+                                value={requirements}
+                                onChange={(e) => setRequirements(e.target.value)}
+                            />
                         </div>
                     </div>
                     <div className='enterprise-form-2-1-3'>

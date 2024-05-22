@@ -61,6 +61,7 @@
     line-height: normal;
     text-decoration-line: underline;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .box-1-inner-bottom {

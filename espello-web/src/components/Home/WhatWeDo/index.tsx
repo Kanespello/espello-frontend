@@ -47,7 +47,12 @@ const WhatWeDo = () => {
                     <div className='box-2-content-2-2-3'></div>
                 </div>
                 <div className='box-2-content-2-3'>
-                    <div className='box-2-content-2-3-content'>Communication Skills Analytical Thinking Problem Solving Business Acumen</div>
+                    <div className='box-2-content-2-3-content'>
+                        Communication Skills <br />
+                        Analytical Thinking<br />
+                        Problem Solving<br />
+                        Business Acumen
+                    </div>
                 </div>
             </div>
             <div className='box-2-content-3'>
@@ -67,7 +72,9 @@ const WhatWeDo = () => {
                     </div>
                 </div>
                 <div className='box-2-content-3-3'>
-
+                    <div className='box-2-content-3-3-content'>
+                    job seekers  |  candidates  |  students  |  recent graduates
+                    </div>
                 </div>
             </div>
         </div>

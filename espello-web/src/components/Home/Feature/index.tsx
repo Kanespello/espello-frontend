@@ -1,7 +1,15 @@
 import React from "react";
 import './index.css'
+import { useNavigate } from "react-router-dom";
 
 const FeatureComponent = () => {
+
+    const navigate = useNavigate();
+
+    const onClickUserWaitlist = () => {
+        navigate('/userWaitlist');
+    };
+
     return (
         <React.Fragment>
             <div className="box-1">
@@ -27,7 +35,7 @@ const FeatureComponent = () => {
                     </div>
                     <div className="box-1-inner-top-bottom">
                         <div className="box-1-inner-top-bottom-1">
-                            <div className="box-1-inner-top-bottom-1-content">
+                            <div className="box-1-inner-top-bottom-1-content" onClick={onClickUserWaitlist}>
                                 Join the Waitlist
                             </div>
                         </div>
