@@ -9,21 +9,46 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [requirements, setRequirements] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');  // State for handling success message
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const resetSuccessMessage = () => {
+    const resetMessages = () => {
         setTimeout(() => {
             setSuccessMessage('');
+            setErrorMessage('');
         }, 2000);
     }
 
     const resetFields = () => {
-        setEmail('');  // Clear email field
-        setPhone('');  // Clear phone field
-        setRequirements('');  // Clear requirements field
+        setEmail('');
+        setPhone('');
+        setRequirements('');
     }
+
+    const isValidEmail = (email: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    const isValidPhone = (phone: string) => {
+        const phoneRegex = /^[0-9]{10,15}$/;
+        return phoneRegex.test(phone);
+    }
+
     const handleSubmit = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         event.preventDefault();
+
+        if (!isValidEmail(email)) {
+            setErrorMessage('Invalid email address.');
+            resetMessages();
+            return;
+        }
+
+        if (!isValidPhone(phone)) {
+            setErrorMessage('Invalid phone number.');
+            resetMessages();
+            return;
+        }
 
         const queryParams = new URLSearchParams({
             email: email,
@@ -46,14 +71,14 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
 
             const result = await response.json();
             console.log('Success:', result);
-            setSuccessMessage('Form submitted successfully!');  // Set success message
-            resetSuccessMessage();
+            setSuccessMessage('Form submitted successfully!');
+            resetMessages();
             resetFields();
 
         } catch (error) {
             console.error('Error:', error);
-            setSuccessMessage('Failed to submit form.');  // Set failure message
-            resetSuccessMessage();
+            setErrorMessage('Failed to submit form.');
+            resetMessages();
         }
     };
 
@@ -113,6 +138,7 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
                     </div>
                 </div>
                 {successMessage && <div className="enterprise-form-success-message">{successMessage}</div>}
+                {errorMessage && <div className="enterprise-form-error-message">{errorMessage}</div>}
             </div>
         </div>
     );

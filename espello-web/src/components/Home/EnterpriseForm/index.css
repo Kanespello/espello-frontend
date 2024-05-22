@@ -191,8 +191,16 @@
     cursor: pointer;
 }
 
-.enterprise-form-success-message {
-    color: var(--Highlight, #FF8371);
+.enterprise-form-success-message,
+.enterprise-form-error-message {
     font-size: 16px;
     margin-top: 10px;
+}
+
+.enterprise-form-success-message {
+    color: var(--Highlight, #FF8371);
+}
+
+.enterprise-form-error-message {
+    color: var(--Highlight, #a70505);
 }
