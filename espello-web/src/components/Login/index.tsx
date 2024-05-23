@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Header from "../Header";
 import './index.css';
+import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
+import { SERVICE_URL_PYTHON } from '../../util/AppConstants';
 
 
 
@@ -51,7 +53,9 @@ const Login: React.FC<LoginProps> = ({ onCreateAccountClick }) => {
                     <div className="user-login-container-inner-left-content-primary-button">Login</div>
                     <div className="user-login-container-inner-left-content-or">OR</div>
                     <div className="user-login-container-inner-left-content-secondary-buttons">
-                        <div className="user-login-container-inner-left-content-secondary-buttons-google">Google</div>
+                        <GoogleOAuthProvider clientId="801004123541-36191n2fjoahivhmoa4fmapddhv0uh2k.apps.googleusercontent.com">
+                            <GoogleComponent />
+                        </GoogleOAuthProvider>
                         <div className="user-login-container-inner-left-content-secondary-buttons-linkedin">Linkedin</div>
                     </div>
                 </div>
@@ -105,5 +109,47 @@ const Register: React.FC<RegisterProps> = ({ onLoginClick }) => {
         </div>
     </div>)
 }
+const GoogleComponent = () => {
+
+    const googleLogin = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            const credential = (tokenResponse as any).credential;
+
+            if (!credential) {
+                console.error('Credential is undefined');
+                return;
+            }
+
+            try {
+                const result = await fetch(`${SERVICE_URL_PYTHON}/verify_google_token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        credential: credential  // Use 'credential' to match your Python code
+                    }).toString(),
+                });
+
+                if (!result.ok) {
+                    throw new Error(`HTTP error! Status: ${result.status}`);
+                }
+
+                const data = await result.json();
+                console.log('Backend response:', data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        },
+        onError: (errorResponse) => {
+            console.error('Login failed:', errorResponse);
+        },
+    });
+
+    return (
+        <div className="user-login-container-inner-left-content-secondary-buttons-google" onClick={() => googleLogin()}>Google</div>
+    );
+};
 
 export default Account;
+
