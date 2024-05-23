@@ -48,14 +48,20 @@ import { SERVICE_URL_PYTHON } from './util/AppConstants';
 const App = () => {
     const handleLoginSuccess = async (response : CredentialResponse) => {
         const { credential } = response;
+        
+        if (!credential) {
+            console.error('Credential is undefined');
+            return;
+        }
+
         try {
             const result = await fetch(`${SERVICE_URL_PYTHON}/verify_google_token`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'  // Set to form URL encoded
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: new URLSearchParams({
-                    credential: credential,  // Use 'credential' to match your Python code
+                    credential: credential  // Use 'credential' to match your Python code
                 }).toString(),
             });
 
