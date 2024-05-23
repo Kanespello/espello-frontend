@@ -50,14 +50,22 @@
     width: 726px;
 }
 
-.user-waitlist-frame-input-content-bottom {
-    color: var(--Grey, #6E6E6E);
+.user-waitlist-frame-input-content-failure,
+.user-waitlist-frame-input-content-success {
     font-family: "Exo 2";
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     align-self: stretch;
+}
+
+.user-waitlist-frame-input-content-failure {
+    color: var(--Highlight, #FF8371);
+}
+
+.user-waitlist-frame-input-content-success {
+    color: var(--Grey, #6E6E6E);
 }
 
 .user-waitlist-frame-input-content-left {
@@ -90,7 +98,8 @@
     gap: 10px;
     cursor: pointer;
 }
-.user-waitlist-frame-input-content-right-button{
+
+.user-waitlist-frame-input-content-right-button {
     background: none;
     border: none;
     color: #FF8371;

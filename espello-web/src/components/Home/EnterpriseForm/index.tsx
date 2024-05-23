@@ -13,14 +13,16 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
         requirements: '',
     });
 
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState<{ text: string, type: 'success' | 'error' } | null>(null);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setMessage('');
-        }, 2000);
+        if (message) {
+            const timer = setTimeout(() => {
+                setMessage(null);
+            }, 2000);
 
-        return () => clearTimeout(timer);
+            return () => clearTimeout(timer);
+        }
     }, [message]);
 
     const isValidEmail = (email: string) => {
@@ -39,12 +41,12 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
         const { email, phone, requirements } = formData;
 
         if (!isValidEmail(email)) {
-            setMessage('Invalid email address.');
+            setMessage({ text: 'Please enter the correct enterprise email address', type: 'error' });
             return;
         }
 
         if (!isValidPhone(phone)) {
-            setMessage('Invalid phone number.');
+            setMessage({ text: 'Please enter the correct enterprise phone', type: 'error' });
             return;
         }
 
@@ -69,12 +71,12 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
 
             const result = await response.json();
             console.log('Success:', result);
-            setMessage('Thanks for your interest. We will get back to you in 24 hours.');
+            setMessage({ text: 'Thanks for your interest. We will get back to you in 24 hours.', type: 'success' });
             setFormData({ email: '', phone: '', requirements: '' });
 
         } catch (error) {
             console.error('Error:', error);
-            setMessage('Failed to submit form.');
+            setMessage({ text: 'Failed to submit form.', type: 'error' });
         }
     };
 
@@ -93,9 +95,6 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
                 <div className='enterprise-form-1-2'></div>
                 <div className='enterprise-form-1-3'></div>
                 <div className='enterprise-form-1-4'>
-                    {/* <div className='enterprise-form-1-4-top'>
-                        <div className='enterprise-form-1-4-top-content'>candidate screening tool</div>
-                    </div> */}
                     <div className='enterprise-form-1-4-bottom'>
                         <div className='enterprise-form-1-4-bottom-content'>ASSESSMENT TOOL FOR CONSULTING & PRODUCT POSITIONS</div>
                     </div>
@@ -145,7 +144,11 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
                             </div>
                         </div>
                     )}
-                    {message && <div className="enterprise-form-success-message">{message}</div>}
+                    {message && (
+                        <div className={`enterprise-form-message-${message.type}`}>
+                            {message.text}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

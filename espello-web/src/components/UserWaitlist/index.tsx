@@ -87,9 +87,9 @@ const UserWaitlist = () => {
                             </button>
                         </div>
                         {error ?
-                            <div className="user-waitlist-frame-input-content-bottom">{error}</div>
+                            <div className="user-waitlist-frame-input-content-failure">{error}</div>
                             :
-                            <div className="user-waitlist-frame-input-content-bottom">
+                            <div className="user-waitlist-frame-input-content-success">
                                 Enter email address to join waitlist
                             </div>
                         }
