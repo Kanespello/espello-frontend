@@ -52,11 +52,11 @@ const App = () => {
             const result = await fetch(`${SERVICE_URL_PYTHON}/verify_google_token`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded'  // Set to form URL encoded
                 },
-                body: JSON.stringify({
-                    credential: credential,
-                }),
+                body: new URLSearchParams({
+                    credential: credential,  // Use 'credential' to match your Python code
+                }).toString(),
             });
 
             if (!result.ok) {
@@ -69,7 +69,6 @@ const App = () => {
             console.error('Error:', error);
         }
     };
-
     const handleLoginFailure = () => {
         console.error('Login failed');
     };
