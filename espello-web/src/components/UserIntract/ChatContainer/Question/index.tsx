@@ -47,9 +47,11 @@ const Question: FC<QuestionProps> = ({ interviewerText, setInterviewerText, conv
                 <div className="chat-bot-container-main-dialog-box">
                     <div className="chat-bot-container-main-dialog-box-heading">Instructions</div>
                     <div className="chat-bot-container-main-dialog-box-content">
-                        1. Each query must be answered within a 90-second timeframe. <br />
-                        2. It is advisable to use Safari as the browser. <br />
-                        3. In Chrome, the speech recognizer will stop after approximately 10 seconds of silence. <br />
+                    This video assessment consists of 5 question(s) and should take you 10 minutes to complete, depending on the number of questions you are assigned.
+You are required to complete your assessment within a single sitting.
+Please upload the right identification documents as mandated (Govt ID etc.)
+Once you are presented with your first question, an automated timer starts. You will be given a preparation time of 45 seconds , followed by a recording time limit that may vary for each question.
+Remember to keep track of the timer while preparing or recording your response. Should you find yourself ready before the time limit, you can choose to either start recording your responses or to submit them beforehand.
                     </div>
                     <div className="chat-bot-container-main-dialog-box-button" onClick={() => {
                         setIsDialogVisible(false);
