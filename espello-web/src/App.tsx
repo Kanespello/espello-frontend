@@ -39,38 +39,52 @@
 // }
 
 // export default App;
-import React, { useEffect } from 'react';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
+
+
+import React from 'react';
+import { GoogleOAuthProvider, GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import { SERVICE_URL_PYTHON } from './util/AppConstants';
 
 const App = () => {
-    const handleLoginSuccess = async (response : any) => {
+    const handleLoginSuccess = async (response : CredentialResponse) => {
         const { credential } = response;
         try {
-            // Send the token to the backend
-            const result = await axios.post(SERVICE_URL_PYTHON+'/verify_google_token', {
-                token: credential,
+            const result = await fetch(`${SERVICE_URL_PYTHON}/verify_google_token`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    credential: credential,
+                }),
             });
-            console.log('Backend response:', result.data);
+
+            if (!result.ok) {
+                throw new Error(`HTTP error! Status: ${result.status}`);
+            }
+
+            const data = await result.json();
+            console.log('Backend response:', data);
         } catch (error) {
             console.error('Error:', error);
         }
     };
 
     const handleLoginFailure = () => {
-        console.error('Login failed:');
+        console.error('Login failed');
     };
 
     return (
         <GoogleOAuthProvider clientId="801004123541-36191n2fjoahivhmoa4fmapddhv0uh2k.apps.googleusercontent.com">
+            <div className="App">
+                <h1>Google OAuth2 Authentication</h1>
                 <GoogleLogin
                     onSuccess={handleLoginSuccess}
                     onError={handleLoginFailure}
                 />
+            </div>
         </GoogleOAuthProvider>
     );
 };
 
 export default App;
-
