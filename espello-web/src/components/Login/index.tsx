@@ -113,7 +113,8 @@ const GoogleComponent = () => {
 
     const googleLogin = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
-            const credential = (tokenResponse as any).credential;
+            
+            const credential = (tokenResponse as any).access_token;
 
             if (!credential) {
                 console.error('Credential is undefined');
