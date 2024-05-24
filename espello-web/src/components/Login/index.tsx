@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Header from "../Header";
 import './index.css';
-import { CredentialResponse, GoogleLogin, GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
-import { SERVICE_URL_PYTHON } from '../../util/AppConstants';
+import { CredentialResponse, GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { GOOGLE_CLIENT_ID, SERVICE_URL_PYTHON } from '../../util/AppConstants';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -53,7 +54,7 @@ const Login: React.FC<LoginProps> = ({ onCreateAccountClick }) => {
                     <div className="user-login-container-inner-left-content-primary-button">Login</div>
                     <div className="user-login-container-inner-left-content-or">OR</div> */}
                     <div className="user-login-container-inner-left-content-secondary-buttons">
-                        <GoogleOAuthProvider clientId="237607592442-qeh39j2ubfo9o6nc4mu8dd61a7tk57qq.apps.googleusercontent.com">
+                        <GoogleOAuthProvider clientId={`${GOOGLE_CLIENT_ID}`}>
                             <GoogleComponent />
                         </GoogleOAuthProvider>
                         {/* <div className="user-login-container-inner-left-content-secondary-buttons-linkedin">Linkedin</div> */}
@@ -106,29 +107,38 @@ const Register: React.FC<RegisterProps> = ({ onLoginClick }) => {
 }
 const GoogleComponent = () => {
 
-    const handleSuccessResponse = async (response : CredentialResponse) => {
+    const navigate = useNavigate();
+
+    const handleSuccessResponse = async (response: CredentialResponse) => {
         // Handle successful authentication response
         const token = response.credential;
         try {
-          const res = await fetch(SERVICE_URL_PYTHON+'/verify_google_token', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `credential=${token}`
-          });
-          // Handle the response from your server
-          console.log(await res.json());
+            const res = await fetch(SERVICE_URL_PYTHON + '/verify_google_token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `credential=${token}`,
+                redirect: 'manual'
+            });
+
+            if (res.status == 0)
+                navigate('/')
+            else {
+                console.error('Error login in');
+            }
+
+            // Handle the response from your server
         } catch (error) {
-          console.error('Error verifying token:', error);
+            console.error('Error verifying token:', error);
         }
-      };
-    
-      const handleErrorResponse = () => {
+    };
+
+    const handleErrorResponse = () => {
         // Handle authentication error
         console.error('Error during Google authentication:');
-      };
-    
+    };
+
 
     return (
         // <div className="user-login-container-inner-left-content-secondary-buttons-google">
@@ -136,8 +146,8 @@ const GoogleComponent = () => {
             onSuccess={handleSuccessResponse}
             onError={handleErrorResponse}
             width={320}
-      />
-    //   </div>
+        />
+        //   </div>
     );
 };
 
