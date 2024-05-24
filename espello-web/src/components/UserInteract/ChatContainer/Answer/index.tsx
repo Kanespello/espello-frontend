@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import './index.css'
 import { ConversationTurn } from "../../../../model/ConversationTurn";
 import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
 
@@ -23,16 +24,15 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
 
         recognition.lang = 'en-US';
         recognition.continuous = true;
-        recognition.interimResults = false;
+        recognition.interimResults = true;
 
         recognition.onstart = () => {
             setUserTranscript('');
-            tempTranscript = '';
         };
 
         recognition.onresult = (event) => {
             const last = event.results.length - 1;
-            tempTranscript = event.results[last][0].transcript;
+            tempTranscript = userTranscript + event.results[last][0].transcript;
             setUserTranscript(tempTranscript);
         };
 
@@ -72,6 +72,7 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
 
     const sendResponse = () => {
         recognition.stop();
+        setUserTranscript('')
         sendIntervieweeResponse(userTranscript);
         conversationContext?.changeConversationTurn(ConversationTurn.WAITING);
     };

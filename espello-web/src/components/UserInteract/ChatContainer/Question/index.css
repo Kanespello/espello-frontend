@@ -1,0 +1,20 @@
+.chat-bot-container-main-transcript {
+    display: flex;
+    padding: 24px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 51px;
+    flex: 1 0 0;
+}
+
+
+.chat-bot-container-main-transcript-content {
+    width: 800px;
+    color: #6E6E6E;
+    font-family: "Exo 2";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

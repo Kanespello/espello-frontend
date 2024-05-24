@@ -1,6 +1,6 @@
-import {TranscriptData} from "./TranscriptData";
+import { Role } from "./Role";
 
 export interface Transcript {
-    status: string,
-    data: TranscriptData;
+    role : Role;
+    text : string;
 }

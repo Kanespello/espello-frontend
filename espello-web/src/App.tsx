@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 import './util/Fonts'
 
-import UserInteract from "./components/UserIntract";
+import UserInteract from "./components/UserInteract";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import Home from './components/Home';

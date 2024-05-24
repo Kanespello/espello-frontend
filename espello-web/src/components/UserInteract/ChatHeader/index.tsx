@@ -2,13 +2,16 @@ import React, { FC, useEffect, useState } from "react";
 import { ConversationTurnContextModel } from "../../../model/ConversationTurnContextModel";
 import { ConversationTurn } from "../../../model/ConversationTurn";
 import ChatHeaderTimer from "./ChatHeaderTimer";
+import { SessionTranscript } from "../../../model/SessionTranscript";
 
 interface ChatHeaderProps {
     conversationContext: ConversationTurnContextModel
     setTimerOut: React.Dispatch<React.SetStateAction<boolean>>;
+    sessionTranscript: SessionTranscript;
+    exitConversation : (sessionTranscript: SessionTranscript) => Promise<void>;
 }
 
-const ChatHeader: FC<ChatHeaderProps> = ({ conversationContext, setTimerOut }) => {
+const ChatHeader: FC<ChatHeaderProps> = ({ conversationContext, setTimerOut,exitConversation,sessionTranscript }) => {
 
     return (
         <div className="chat-bot-container-header">
@@ -35,7 +38,7 @@ const ChatHeader: FC<ChatHeaderProps> = ({ conversationContext, setTimerOut }) =
                                 strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </div>
-                    <div className="chat-bot-container-header-main-right-content">
+                    <div className="chat-bot-container-header-main-right-content" onClick={()=>exitConversation(sessionTranscript)}>
                         Exit Interview
                     </div>
                 </div>

@@ -1,0 +1,62 @@
+
+.chat-bot-container-main-user {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    width: 800px;
+}
+
+.chat-bot-container-main-user-field {
+    display: flex;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    align-self: stretch;
+    border: 1px solid #FF8371;
+}
+
+.chat-bot-container-main-user-button {
+    display: flex;
+    padding: 10px 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: #FF8371;
+}
+
+.chat-bot-container-main-user-field-input {
+    width: 100%;
+    height: 100%;
+    color: #F4EAE7;
+    font-family: "Droid Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    /* 137.5% */
+    flex: 1 0 0;
+    background: #121212;
+    outline: none;
+    border: none;
+    resize: none;
+}
+
+.chat-bot-container-main-user-button-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.chat-bot-container-main-user-button-content {
+    color: #121212;
+    font-family: "Exo 2";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    letter-spacing: 0.48px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
