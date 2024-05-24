@@ -10,6 +10,34 @@
     gap: 305px;
 }
 
+.user-waitlist-frame-submit-model {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}
+
+.user-waitlist-frame-submit-model-timer {
+    align-self: stretch;
+    color: var(--Grey, #6E6E6E);
+    text-align: center;
+    font-family: "Exo 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.user-waitlist-frame-submit-model-timer-bold {
+    color: var(--Grey, #6E6E6E);
+    font-family: "Exo 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
 .user-waitlist-frame-submit {
     display: flex;
     flex-direction: column;
@@ -32,7 +60,7 @@
 
 .user-waitlist-frame-submit-bottom {
     align-self: stretch;
-    color: var(--Grey, #6E6E6E);
+    color: var(--Background---Light, #F4EAE7);
     text-align: center;
     font-family: "Exo 2";
     font-size: 16px;

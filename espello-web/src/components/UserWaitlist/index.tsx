@@ -10,15 +10,22 @@ const UserWaitlist = () => {
     const [error, setError] = useState<string>('');
     const navigate = useNavigate();
 
+    const [seconds, setSeconds] = useState(10);
+
     useEffect(() => {
         if (isSuccess) {
-            const timer = setTimeout(() => {
+            if (seconds === 0)
                 navigate('/');
-            }, 3000);
 
-            return () => clearTimeout(timer);
+            const interval = setInterval(() => {
+                // Decrease the number of seconds every second
+                setSeconds(prevSeconds => Math.max(prevSeconds - 1, 0)); // Ensure seconds doesn't go below 0
+            }, 1000); // Run every second
+
+            // Clear interval when component unmounts or when timer reaches 0
+            return () => clearInterval(interval);
         }
-    }, [isSuccess, navigate]);
+    }, [seconds, isSuccess, navigate]); // Re-run effect whenever 'seconds' changes
 
     const validateEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -95,12 +102,17 @@ const UserWaitlist = () => {
                         }
                     </form>
                     :
-                    <div className="user-waitlist-frame-submit">
-                        <div className="user-waitlist-frame-submit-top">
-                            Thanks!
+                    <div className="user-waitlist-frame-submit-model">
+                        <div className="user-waitlist-frame-submit">
+                            <div className="user-waitlist-frame-submit-top">
+                                Thanks!
+                            </div>
+                            <div className="user-waitlist-frame-submit-bottom">
+                                Lookout for our email as we open for early birds in 30 days
+                            </div>
                         </div>
-                        <div className="user-waitlist-frame-submit-bottom">
-                            Lookout for our email as we open for early birds in 30 days
+                        <div className="user-waitlist-frame-submit-model-timer">
+                            Going back to homepage in <span className="user-waitlist-frame-submit-model-timer-bold">{seconds} seconds</span>
                         </div>
                     </div>
                 }
