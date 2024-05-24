@@ -20,28 +20,37 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
     }, [])
 
     useEffect(() => {
-        let tempTranscript = '';
 
         recognition.lang = 'en-US';
         recognition.continuous = true;
         recognition.interimResults = true;
 
         recognition.onstart = () => {
+            console.log("START")
             setUserTranscript('');
         };
 
         recognition.onresult = (event) => {
-            const last = event.results.length - 1;
-            tempTranscript = userTranscript + event.results[last][0].transcript;
-            setUserTranscript(tempTranscript);
+
+            let interimTranscript = ''
+            console.log(event)
+            for (let i = 0; i < event.results.length; i++) {
+                if (i == (event.results.length - 1)) {
+                    interimTranscript += (' ' + event.results[i][0].transcript);
+                    setUserTranscript(interimTranscript);
+                } else
+                    interimTranscript += (' ' + event.results[i][0].transcript);
+            }
         };
 
         recognition.onerror = (event) => {
+            console.log("ERROR")
             console.error('Speech recognition error:', event.error);
             setIsUserSpeaking(false);
         };
 
         recognition.onend = () => {
+            console.log("END")
             setIsUserSpeaking(false);
             setUserTranscript('');
         };
