@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from "../Header";
 import './index.css';
-import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
+import { CredentialResponse, GoogleLogin, GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 import { SERVICE_URL_PYTHON } from '../../util/AppConstants';
 
 
@@ -38,7 +38,7 @@ const Login: React.FC<LoginProps> = ({ onCreateAccountClick }) => {
                             <div className="user-login-container-inner-left-content-heading2-2" onClick={onCreateAccountClick}>Create account with email</div>
                         </div>
                     </div>
-                    <div className="user-login-container-inner-left-content-fields">
+                    {/* <div className="user-login-container-inner-left-content-fields">
                         <div className="user-login-container-inner-left-content-fields-email">
                             <div className="user-login-container-inner-left-content-fields-email-input">
                                 <input className="user-login-container-inner-left-content-fields-email-input-content" placeholder="email"></input>
@@ -51,12 +51,12 @@ const Login: React.FC<LoginProps> = ({ onCreateAccountClick }) => {
                         </div>
                     </div>
                     <div className="user-login-container-inner-left-content-primary-button">Login</div>
-                    <div className="user-login-container-inner-left-content-or">OR</div>
+                    <div className="user-login-container-inner-left-content-or">OR</div> */}
                     <div className="user-login-container-inner-left-content-secondary-buttons">
-                        <GoogleOAuthProvider clientId="801004123541-36191n2fjoahivhmoa4fmapddhv0uh2k.apps.googleusercontent.com">
+                        <GoogleOAuthProvider clientId="237607592442-qeh39j2ubfo9o6nc4mu8dd61a7tk57qq.apps.googleusercontent.com">
                             <GoogleComponent />
                         </GoogleOAuthProvider>
-                        <div className="user-login-container-inner-left-content-secondary-buttons-linkedin">Linkedin</div>
+                        {/* <div className="user-login-container-inner-left-content-secondary-buttons-linkedin">Linkedin</div> */}
                     </div>
                 </div>
             </div>
@@ -86,11 +86,6 @@ const Register: React.FC<RegisterProps> = ({ onLoginClick }) => {
                                 <input className="user-login-container-inner-left-content-fields-email-input-content" placeholder="email"></input>
                             </div>
                         </div>
-                        <div className="user-login-container-inner-left-content-fields-otp">
-                            <div className="user-login-container-inner-left-content-fields-otp-input">
-                                <input className="user-login-container-inner-left-content-fields-otp-input-content" placeholder="enter OTP sent on email"></input>
-                            </div>
-                        </div>
                         <div className="user-login-container-inner-left-content-fields-password">
                             <div className="user-login-container-inner-left-content-fields-password-input">
                                 <input className="user-login-container-inner-left-content-fields-password-input-content" placeholder="password"></input>
@@ -102,7 +97,7 @@ const Register: React.FC<RegisterProps> = ({ onLoginClick }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="user-login-container-inner-left-content-primary-button">Login</div>
+                    <div className="user-login-container-inner-left-content-primary-button">Create account</div>
                 </div>
             </div>
             <div className="user-login-container-inner-right"></div>
@@ -111,44 +106,38 @@ const Register: React.FC<RegisterProps> = ({ onLoginClick }) => {
 }
 const GoogleComponent = () => {
 
-    const googleLogin = useGoogleLogin({
-        onSuccess: async (tokenResponse) => {
-            
-            const credential = (tokenResponse as any).access_token;
-
-            if (!credential) {
-                console.error('Credential is undefined');
-                return;
-            }
-
-            try {
-                const result = await fetch(`${SERVICE_URL_PYTHON}/verify_google_token`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: new URLSearchParams({
-                        credential: credential  // Use 'credential' to match your Python code
-                    }).toString(),
-                });
-
-                if (!result.ok) {
-                    throw new Error(`HTTP error! Status: ${result.status}`);
-                }
-
-                const data = await result.json();
-                console.log('Backend response:', data);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        },
-        onError: (errorResponse) => {
-            console.error('Login failed:', errorResponse);
-        },
-    });
+    const handleSuccessResponse = async (response : CredentialResponse) => {
+        // Handle successful authentication response
+        const token = response.credential;
+        try {
+          const res = await fetch(SERVICE_URL_PYTHON+'/verify_google_token', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `credential=${token}`
+          });
+          // Handle the response from your server
+          console.log(await res.json());
+        } catch (error) {
+          console.error('Error verifying token:', error);
+        }
+      };
+    
+      const handleErrorResponse = () => {
+        // Handle authentication error
+        console.error('Error during Google authentication:');
+      };
+    
 
     return (
-        <div className="user-login-container-inner-left-content-secondary-buttons-google" onClick={() => googleLogin()}>Google</div>
+        // <div className="user-login-container-inner-left-content-secondary-buttons-google">
+        <GoogleLogin
+            onSuccess={handleSuccessResponse}
+            onError={handleErrorResponse}
+            width={320}
+      />
+    //   </div>
     );
 };
 

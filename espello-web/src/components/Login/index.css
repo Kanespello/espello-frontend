@@ -88,7 +88,6 @@
 }
 
 .user-login-container-inner-left-content-fields-email,
-.user-login-container-inner-left-content-fields-otp,
 .user-login-container-inner-left-content-fields-password {
     display: flex;
     align-items: center;
@@ -98,7 +97,6 @@
 }
 
 .user-login-container-inner-left-content-fields-email-input,
-.user-login-container-inner-left-content-fields-otp-input,
 .user-login-container-inner-left-content-fields-password-input {
     display: flex;
     justify-content: center;
@@ -109,7 +107,6 @@
 }
 
 .user-login-container-inner-left-content-fields-email-input-content,
-.user-login-container-inner-left-content-fields-otp-input-content,
 .user-login-container-inner-left-content-fields-password-input-content {
     color: var(--Grey, #6E6E6E);
     font-family: "Exo 2";
@@ -124,7 +121,7 @@
 
 .user-login-container-inner-left-content-secondary-buttons {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 8px;
     align-self: stretch;
 }
