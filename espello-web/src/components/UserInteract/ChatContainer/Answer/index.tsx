@@ -1,23 +1,24 @@
-import React, { FC, useEffect, useMemo, useState } from "react";
-import './index.css'
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
+import './index.css';
 import { ConversationTurn } from "../../../../model/ConversationTurn";
 import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
 
 export interface AnswerProps {
     timerOut: boolean;
     sendIntervieweeResponse: (intervieweeText: string) => Promise<void>;
-    conversationContext: ConversationTurnContextModel
+    conversationContext: ConversationTurnContextModel;
 }
 
 const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversationContext }) => {
 
     const [userTranscript, setUserTranscript] = useState<string>('');
     const [isUserSpeaking, setIsUserSpeaking] = useState<boolean>(false);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const recognition = useMemo(() => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         return new SpeechRecognition();
-    }, [])
+    }, []);
 
     useEffect(() => {
 
@@ -26,43 +27,40 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
         recognition.interimResults = true;
 
         recognition.onstart = () => {
-            console.log("START")
             setUserTranscript('');
         };
 
         recognition.onresult = (event) => {
-
-            let interimTranscript = ''
-            console.log(event)
+            let interimTranscript = '';
             for (let i = 0; i < event.results.length; i++) {
-                if (i == (event.results.length - 1)) {
-                    interimTranscript += (' ' + event.results[i][0].transcript);
-                    setUserTranscript(interimTranscript);
-                } else
-                    interimTranscript += (' ' + event.results[i][0].transcript);
+                interimTranscript += ' ' + event.results[i][0].transcript;
             }
+            setUserTranscript(interimTranscript);
         };
 
         recognition.onerror = (event) => {
-            console.log("ERROR")
             console.error('Speech recognition error:', event.error);
             setIsUserSpeaking(false);
         };
 
         recognition.onend = () => {
-            console.log("END")
+            console.log("END");
             setIsUserSpeaking(false);
-            setUserTranscript('');
+            // Restart the recognition if it's supposed to be listening
+            if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE) {
+                recognition.start();
+                setIsUserSpeaking(true);
+            }
         };
 
         return () => {
             recognition.abort();
         };
-    }, [recognition]);
+    }, [recognition, conversationContext?.conversationTurn]);
 
     const onChangeTranscript = (event: any) => {
         setUserTranscript(event.target.value);
-    }
+    };
 
     useEffect(() => {
         if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE && !isUserSpeaking) {
@@ -72,7 +70,6 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
     }, [conversationContext?.conversationTurn]);
 
     useEffect(() => {
-
         if (timerOut) {
             // Call sendResponse function when timerOut becomes true
             sendResponse();
@@ -81,15 +78,22 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
 
     const sendResponse = () => {
         recognition.stop();
-        setUserTranscript('')
+        setUserTranscript('');
         sendIntervieweeResponse(userTranscript);
         conversationContext?.changeConversationTurn(ConversationTurn.WAITING);
     };
+
+    useEffect(() => {
+        if (textareaRef.current) {
+            textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
+        }
+    }, [userTranscript]);
 
     return (
         <div className="chat-bot-container-main-user">
             <div className="chat-bot-container-main-user-field">
                 <textarea
+                    ref={textareaRef}
                     className="chat-bot-container-main-user-field-input"
                     value={userTranscript}
                     onChange={onChangeTranscript}
@@ -112,7 +116,8 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
                     <span>send</span>
                 </div>
             </div>
-        </div>)
-}
+        </div>
+    );
+};
 
 export default Answer;
