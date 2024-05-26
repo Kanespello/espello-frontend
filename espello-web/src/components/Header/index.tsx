@@ -16,7 +16,7 @@ const Header: FC<HeaderProps> = ({ scrollToCompnent, enableOtherButtons }) => {
     };
 
     const onClickUserWaitlist = () => {
-        navigate('/userWaitlist');
+        navigate('/user-waitlist');
     };
 
     const onClickLogo = () => {

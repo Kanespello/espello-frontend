@@ -4,8 +4,8 @@ import { SESSION_SECRET_KEY, USER_SESSION_KEY } from '../../util/AppConstants';
 import { JwtPayload } from 'jwt-decode';
 
 interface AuthContextType {
-  user: JwtPayload | null;
-  login: (user: JwtPayload) => void;
+  user: any
+  login: (user :any) => void;
   logout: () => void;
   isLoggedIn: () => boolean;
 }

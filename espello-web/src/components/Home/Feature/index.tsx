@@ -7,7 +7,7 @@ const FeatureComponent = () => {
     const navigate = useNavigate();
 
     const onClickUserWaitlist = () => {
-        navigate('/userWaitlist');
+        navigate('/user-waitlist');
     };
 
     return (

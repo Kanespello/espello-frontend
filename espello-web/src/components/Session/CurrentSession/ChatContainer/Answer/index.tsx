@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import './index.css';
-import { ConversationTurn } from "../../../../model/ConversationTurn";
-import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
+import { ConversationTurn } from "../../../../../model/ConversationTurn";
+import { ConversationTurnContextModel } from "../../../../../model/ConversationTurnContextModel";
 
 export interface AnswerProps {
     timerOut: boolean;

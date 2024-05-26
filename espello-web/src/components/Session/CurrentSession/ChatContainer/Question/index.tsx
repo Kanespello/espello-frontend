@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import './index.css'
-import { ConversationTurn } from "../../../../model/ConversationTurn";
-import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
+import { ConversationTurn } from "../../../../../model/ConversationTurn";
+import { ConversationTurnContextModel } from "../../../../../model/ConversationTurnContextModel";
 
 interface QuestionProps {
     interviewerText: string;

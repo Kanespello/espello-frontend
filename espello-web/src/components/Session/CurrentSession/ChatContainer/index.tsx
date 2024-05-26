@@ -2,13 +2,13 @@ import Question from "./Question";
 import Loader from "./Loader";
 import Answer from "./Answer";
 import React, { FC, SetStateAction, useState } from "react";
-import { InterviewerResponse } from "../../../model/InterviewerResponse";
-import { ConversationTurnContextModel } from "../../../model/ConversationTurnContextModel";
-import { SERVICE_URL_PYTHON } from "../../../util/AppConstants";
+import { InterviewerResponse } from "../../../../model/InterviewerResponse";
+import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
+import { SERVICE_URL_PYTHON } from "../../../../util/AppConstants";
 import Disclaimer from "./Disclaimer";
-import { SessionTranscript } from "../../../model/SessionTranscript";
-import { Transcript } from "../../../model/Transcript";
-import { Role } from "../../../model/Role";
+import { SessionTranscript } from "../../../../model/SessionTranscript";
+import { Transcript } from "../../../../model/Transcript";
+import { Role } from "../../../../model/Role";
 
 export interface ChatContainerProps {
     timerOut: boolean;

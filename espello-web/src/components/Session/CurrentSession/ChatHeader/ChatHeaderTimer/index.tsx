@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ConversationTurnContextModel } from '../../../../model/ConversationTurnContextModel';
-import { ConversationTurn } from '../../../../model/ConversationTurn';
+import { ConversationTurnContextModel } from '../../../../../model/ConversationTurnContextModel';
+import { ConversationTurn } from '../../../../../model/ConversationTurn';
 
 interface ChatHeaderTimerProps {
     conversationContext: ConversationTurnContextModel

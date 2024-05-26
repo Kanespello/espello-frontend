@@ -1,0 +1,106 @@
+.rate-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.rate-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    align-items: flex-start;
+    gap: 32px;
+    border-radius: 4px;
+    border: 1px solid var(--Grey, #6E6E6E);
+    background: var(--Black, #121212);
+    z-index: 200;
+    color: aliceblue;
+}
+
+.rate-container-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.rate-container-heading1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: var(--Background---Light, #F4EAE7);
+    font-family: Raleway;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.rate-container-heading2 {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--Grey, #6E6E6E);
+    font-family: "Exo 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.rate-container-feedback {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.rate-container-feedback-rate {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.rate-container-feedback-content-input {
+    flex: 1 0 0;
+    color: var(--Grey, #6E6E6E);
+    font-family: "Exo 2";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background: var(--Black, #121212);
+    padding: 4px 8px;
+    outline: none;
+}
+
+.rate-container-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.rate-container-submit {
+    display: flex;
+    padding: 12px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+    background: #CB422F;
+    cursor: pointer;
+}
+
+.rate-container-submit-button {
+    color: var(--Background---Light, #F4EAE7);
+    font-family: "Exo 2";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.48px;
+    text-transform: uppercase;
+}

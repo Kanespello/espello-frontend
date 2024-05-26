@@ -1,6 +1,6 @@
 import React, { FC, useContext } from "react";
-import { ConversationTurn } from "../../../../model/ConversationTurn";
-import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
+import { ConversationTurn } from "../../../../../model/ConversationTurn";
+import { ConversationTurnContextModel } from "../../../../../model/ConversationTurnContextModel";
 
 
 interface LoaderProps {

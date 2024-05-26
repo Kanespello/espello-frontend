@@ -1,4 +1,4 @@
-import { SPEAKER_INITIAL_TEXT } from '../../../../util/AppConstants';
+import { SPEAKER_INITIAL_TEXT } from '../../../../../util/AppConstants';
 import './index.css'
 
 interface DisclaimerProps {
