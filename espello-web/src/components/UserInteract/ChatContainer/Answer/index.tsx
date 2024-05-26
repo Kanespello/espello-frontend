@@ -10,7 +10,6 @@ export interface AnswerProps {
 }
 
 const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversationContext }) => {
-
     const [userTranscript, setUserTranscript] = useState<string>('');
     const [isUserSpeaking, setIsUserSpeaking] = useState<boolean>(false);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -21,12 +20,14 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
     }, []);
 
     useEffect(() => {
+        if (!recognition) return;
 
         recognition.lang = 'en-US';
         recognition.continuous = true;
         recognition.interimResults = true;
 
         recognition.onstart = () => {
+            console.info("Speech recognition started.");
             setUserTranscript('');
         };
 
@@ -44,9 +45,8 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
         };
 
         recognition.onend = () => {
-            console.log("END");
+            console.info("Speech recognition ended.");
             setIsUserSpeaking(false);
-            // Restart the recognition if it's supposed to be listening
             if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE) {
                 recognition.start();
                 setIsUserSpeaking(true);
@@ -58,29 +58,32 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
         };
     }, [recognition, conversationContext?.conversationTurn]);
 
-    const onChangeTranscript = (event: any) => {
+    const onChangeTranscript = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setUserTranscript(event.target.value);
     };
 
     useEffect(() => {
         if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE && !isUserSpeaking) {
-            recognition.start();
-            setIsUserSpeaking(true); // Set isUserSpeaking to true when recognition starts
+            recognition?.start();
+            setIsUserSpeaking(true);
         }
     }, [conversationContext?.conversationTurn]);
 
     useEffect(() => {
         if (timerOut) {
-            // Call sendResponse function when timerOut becomes true
             sendResponse();
         }
     }, [timerOut]);
 
-    const sendResponse = () => {
-        recognition.stop();
-        setUserTranscript('');
-        sendIntervieweeResponse(userTranscript);
-        conversationContext?.changeConversationTurn(ConversationTurn.WAITING);
+    const sendResponse = async () => {
+        try {
+            recognition?.stop();
+            await sendIntervieweeResponse(userTranscript);
+            setUserTranscript('');
+            conversationContext?.changeConversationTurn(ConversationTurn.WAITING);
+        } catch (error) {
+            console.error('Error sending interviewee response:', error);
+        }
     };
 
     useEffect(() => {
@@ -97,19 +100,14 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
                     className="chat-bot-container-main-user-field-input"
                     value={userTranscript}
                     onChange={onChangeTranscript}
-                    rows={2} // Set the initial number of visible rows
+                    rows={2}
                 />
             </div>
             <div className="chat-bot-container-main-user-button" onClick={sendResponse}>
                 <div className="chat-bot-container-main-user-button-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none">
-                        <path d="M5.25073 16.4995L2.25031 13.499L5.25073 10.4986" stroke="#121212"
-                            strokeWidth="1.50251" strokeLinecap="round" strokeLinejoin="round" />
-                        <path
-                            d="M3.00073 13.4982H16.782C19.5364 13.4982 21.7507 11.1858 21.7507 8.43567V7.49817"
-                            stroke="#121212" strokeWidth="1.50251" strokeLinecap="round"
-                            strokeLinejoin="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M5.25073 16.4995L2.25031 13.499L5.25073 10.4986" stroke="#121212" strokeWidth="1.50251" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M3.00073 13.4982H16.782C19.5364 13.4982 21.7507 11.1858 21.7507 8.43567V7.49817" stroke="#121212" strokeWidth="1.50251" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </div>
                 <div className="chat-bot-container-main-user-button-content">
