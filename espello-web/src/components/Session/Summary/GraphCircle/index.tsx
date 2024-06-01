@@ -14,9 +14,9 @@ const GraphCircle: React.FC<GraphCircleProps> = ({ value }) => {
                 <svg style={{ position: "absolute", left: "1px", top: "1px" }} xmlns="http://www.w3.org/2000/svg" width="78" height="78" viewBox="0 0 78 78" fill="none">
                     <path d={getPath(7)} fill="#FF8371" />
                 </svg>
-                <svg style={{ position: "absolute", left: "10px", top: "10px" }} xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                {/* <svg style={{ position: "absolute", left: "10px", top: "10px" }} xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
                     <path d={getPath2(7)} fill="#7FD1AE" />
-                </svg>
+                </svg> */}
             </div>
         </div>
     )
