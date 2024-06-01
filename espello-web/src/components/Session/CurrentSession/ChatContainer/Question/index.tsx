@@ -1,17 +1,25 @@
-import React, { FC, useEffect, useState } from "react";
-import './index.css'
+import React, { FC, SetStateAction, useEffect, useState } from "react";
+import './index.css';
 import { ConversationTurn } from "../../../../../model/ConversationTurn";
 import { ConversationTurnContextModel } from "../../../../../model/ConversationTurnContextModel";
+import { SPEAKER_LAST_TEXT } from "../../../../../util/AppConstants";
 
 interface QuestionProps {
     interviewerText: string;
-    setInterviewerText: React.Dispatch<React.SetStateAction<string>>;
     conversationContext: ConversationTurnContextModel;
+    setIsRateBoxVisible: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const Question: FC<QuestionProps> = ({ interviewerText, setInterviewerText, conversationContext }) => {
+const Question: FC<QuestionProps> = ({ interviewerText, setIsRateBoxVisible, conversationContext }) => {
 
     const [espelloTranscript, setEspelloTranscript] = useState<string>('');
+
+    const formatTranscript = (transcript: string): string => {
+        return transcript
+            .replace(/\*\*(.*?)\*\*/g, '<i><strong>$1</strong></i>') // Bold the text between **
+            .replace(/(\d\.\s\*\*[^:]+\*\*[^.]+\.)/g, '$1<br><br>') // Add line breaks after each strategy
+            .replace(/\n/g, '<br>'); // Ensure newlines are converted to <br> tags
+    };
 
     const speakSynthesizer = (transcript: string): void => {
         conversationContext?.changeConversationTurn(ConversationTurn.INTERVIEWER);
@@ -22,7 +30,16 @@ const Question: FC<QuestionProps> = ({ interviewerText, setInterviewerText, conv
 
         utterance.onboundary = (event: SpeechSynthesisEvent): void => {
             const spokenWord: string = transcript.slice(0, event.charIndex + event.charLength);
-            setEspelloTranscript(spokenWord);
+            const formattedSpokenWord = formatTranscript(spokenWord);
+            setEspelloTranscript(formattedSpokenWord);
+
+            //Check for interview closer
+            const isLastMessageFromInterviewer = formattedSpokenWord.includes(SPEAKER_LAST_TEXT)
+
+            if (isLastMessageFromInterviewer)
+                setTimeout(() => {
+                    setIsRateBoxVisible(true)
+                }, 3000)
         };
 
         utterance.onend = () => {
@@ -41,10 +58,11 @@ const Question: FC<QuestionProps> = ({ interviewerText, setInterviewerText, conv
         };
     }, [interviewerText]);
 
+
     return (
         <div className="chat-bot-container-main-transcript">
             <div className="chat-bot-container-main-transcript-content">
-                <p>{espelloTranscript}</p>
+                <p dangerouslySetInnerHTML={{ __html: espelloTranscript }} style={{ overflow: "visible" }}></p>
             </div>
         </div>
     );

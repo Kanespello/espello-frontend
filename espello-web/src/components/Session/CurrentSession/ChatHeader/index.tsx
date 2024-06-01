@@ -7,10 +7,10 @@ import { SessionTranscript } from "../../../../model/SessionTranscript";
 interface ChatHeaderProps {
     conversationContext: ConversationTurnContextModel
     setTimerOut: React.Dispatch<React.SetStateAction<boolean>>;
-    setExitSessionFlag: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsRateBoxVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ChatHeader: FC<ChatHeaderProps> = ({ conversationContext, setTimerOut,setExitSessionFlag }) => {
+const ChatHeader: FC<ChatHeaderProps> = ({ conversationContext, setTimerOut,setIsRateBoxVisible: setExitSessionFlag }) => {
 
     return (
         <div className="chat-bot-container-header">

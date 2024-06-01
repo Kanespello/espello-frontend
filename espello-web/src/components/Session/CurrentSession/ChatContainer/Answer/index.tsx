@@ -22,39 +22,45 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
     useEffect(() => {
         if (!recognition) return;
 
-        recognition.lang = 'en-US';
-        recognition.continuous = true;
-        recognition.interimResults = true;
+        if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE) {
+            recognition.lang = 'en-US';
+            recognition.continuous = true;
+            recognition.interimResults = true;
 
-        recognition.onstart = () => {
-            console.info("Speech recognition started.");
-            setUserTranscript('');
-        };
+            recognition.onstart = () => {
+                console.info("Speech recognition started.");
+                setUserTranscript('');
+            };
 
-        recognition.onresult = (event) => {
-            let interimTranscript = '';
-            for (let i = 0; i < event.results.length; i++) {
-                interimTranscript += ' ' + event.results[i][0].transcript;
-            }
-            setUserTranscript(interimTranscript);
-        };
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                for (let i = 0; i < event.results.length; i++) {
+                    interimTranscript += ' ' + event.results[i][0].transcript;
+                }
+                setUserTranscript(interimTranscript);
+            };
 
-        recognition.onerror = (event) => {
-            console.error('Speech recognition error:', event.error);
-            setIsUserSpeaking(false);
-        };
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                setIsUserSpeaking(false);
+            };
 
-        recognition.onend = () => {
-            console.info("Speech recognition ended.");
-            setIsUserSpeaking(false);
-            if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE) {
-                recognition.start();
-                setIsUserSpeaking(true);
-            }
-        };
+            recognition.onend = () => {
+                console.info("Speech recognition ended.");
+                setIsUserSpeaking(false);
+                if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE) {
+                    recognition.start();
+                    setIsUserSpeaking(true);
+                }
+               else{
+                    recognition.stop();
+                }
+            };
+        }
 
         return () => {
             recognition.abort();
+            recognition.stop();
         };
     }, [recognition, conversationContext?.conversationTurn]);
 
@@ -80,7 +86,6 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
             recognition?.stop();
             await sendIntervieweeResponse(userTranscript);
             setUserTranscript('');
-            conversationContext?.changeConversationTurn(ConversationTurn.WAITING);
         } catch (error) {
             console.error('Error sending interviewee response:', error);
         }
@@ -92,15 +97,17 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
         }
     }, [userTranscript]);
 
+
     return (
         <div className="chat-bot-container-main-user">
             <div className="chat-bot-container-main-user-field">
                 <textarea
                     ref={textareaRef}
                     className="chat-bot-container-main-user-field-input"
-                    value={userTranscript}
+                    value={conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE ? userTranscript : ""}
                     onChange={onChangeTranscript}
                     rows={2}
+                    disabled={conversationContext?.conversationTurn === ConversationTurn.INTERVIEWER}
                 />
             </div>
             <div className="chat-bot-container-main-user-button" onClick={sendResponse}>

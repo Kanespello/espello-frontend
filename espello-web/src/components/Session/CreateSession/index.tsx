@@ -1,68 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './index.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Account/AuthContext';
 import { SERVICE_URL_JAVA } from '../../../util/AppConstants';
-
-interface ButtonOption {
-    label: string;
-    selected: boolean;
-}
-interface ButtonOptions {
-    label: string;
-    options: ButtonOption[]
-}
-
-const details: ButtonOptions[] = [
-    {
-        label: "role",
-        options: [
-            {
-                label: "product",
-                selected: false
-            },
-            {
-                label: "Consultant",
-                selected: true
-            },
-            {
-                label: "Strategy",
-                selected: false
-            }
-        ]
-    },
-    {
-        label: "mode",
-        options: [
-            {
-                label: "challenge",
-                selected: true
-            },
-            {
-                label: "friendly",
-                selected: false
-            },
-            {
-                label: "assisted",
-                selected: false
-            }
-        ]
-    },
-    {
-        label: "company type",
-        options: [
-            {
-                label: "start-up",
-                selected: true
-            },
-            {
-                label: "multi-national",
-                selected: false
-            }
-        ]
-    }
-]
-
+import { details } from './util';
 
 const CreateSession = () => {
 
@@ -70,40 +11,9 @@ const CreateSession = () => {
 
     const navigate = useNavigate();
 
-    const registerUser = async () => {
-
-        const url = `${SERVICE_URL_JAVA}/registration/api/v1/register`;
-        const data = {
-            name: user?.name,
-            email: user?.email,
-            registrationMedium: "gsignup"
-        };
-
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            const result = await response.json();
-
-            if (result.status === 'success') {
-                console.error(result.data.errorDescription);
-                await createSession(result.data.userId);
-            } else {
-                console.error('An unknown error occurred');
-            }
-        }
-        catch (error: any) {
-            console.error('Error:', error);
-        }
-    }
-
     const createSession = async (userId: number) => {
         const url = `${SERVICE_URL_JAVA}/session/api/v1/createSession`;
+        console.log(userId)
         const data = {
             "userId": userId,
             "sessionDetails": {
@@ -130,6 +40,7 @@ const CreateSession = () => {
                 navigate(`/session/current-session/${result.data.sessionId}`);
             } else {
                 console.error('An unknown error occurred');
+                //TODO: Handle session not created
             }
         }
         catch (error: any) {
@@ -140,7 +51,8 @@ const CreateSession = () => {
 
 
     const startSession = async () => {
-        await registerUser();
+        console.log(user)
+        await createSession(user?.user_id);
     }
 
     return (

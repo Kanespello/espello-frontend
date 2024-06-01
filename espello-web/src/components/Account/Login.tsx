@@ -13,10 +13,10 @@ const Login: React.FC<LoginProps> = ({ onCreateAccountClick }) => {
                 <div className="user-login-container-inner-left-content">
                     <div className="user-login-container-inner-left-content-heading">
                         <div className="user-login-container-inner-left-content-heading1">Login to Espello!</div>
-                        <div className="user-login-container-inner-left-content-heading2">
+                        {/* <div className="user-login-container-inner-left-content-heading2">
                             <div className="user-login-container-inner-left-content-heading2-1">Not yet with us?</div>
                             <div className="user-login-container-inner-left-content-heading2-2" onClick={onCreateAccountClick}>Create account with email</div>
-                        </div>
+                        </div> */}
                     </div>
                     {/* <div className="user-login-container-inner-left-content-fields">
                         <div className="user-login-container-inner-left-content-fields-email">

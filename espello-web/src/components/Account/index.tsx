@@ -3,6 +3,7 @@ import Header from "../Header";
 import './index.css';
 import Register from './Register';
 import Login from './Login';
+import { useAuth } from './AuthContext';
 
 const Account = () => {
 
@@ -11,6 +12,8 @@ const Account = () => {
     const toggleForm = () => {
         setShowLogin(prevState => !prevState);
     };
+
+    
 
     return (
         <>

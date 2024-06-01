@@ -3,10 +3,12 @@ import './index.css'
 import { SERVICE_URL_JAVA } from '../../../util/AppConstants';
 
 interface RateProp {
-    sessionId: string | undefined
+    sessionId: string | undefined;
+    setIsRateBoxVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsSummaryPageVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Rate: React.FC<RateProp> = ({ sessionId }) => {
+const Rate: React.FC<RateProp> = ({ sessionId, setIsRateBoxVisible,setIsSummaryPageVisible }) => {
 
     const [rating, setRating] = useState<number>(0);
     const [comment, setComment] = useState<string>('');
@@ -23,6 +25,8 @@ const Rate: React.FC<RateProp> = ({ sessionId }) => {
 
             if (result.status === 'success') {
                 console.log(result);
+                setIsRateBoxVisible(false)
+                setIsSummaryPageVisible(true)
             } else {
                 alert('An unknown error occurred, please retry')
             }
@@ -37,8 +41,8 @@ const Rate: React.FC<RateProp> = ({ sessionId }) => {
         <div className='rate-main'>
             <div className='rate-container'>
                 <div className='rate-container-heading'>
-                    <div className='rate-container-heading1'>Leaving early?</div>
-                    <div className='rate-container-heading2'>Rate & tell us why</div>
+                    <div className='rate-container-heading1'>How was it?</div>
+                    <div className='rate-container-heading2'>Rate & tell us</div>
                 </div>
                 <div className='rate-container-feedback'>
                     <div className='rate-container-feedback-rate'>

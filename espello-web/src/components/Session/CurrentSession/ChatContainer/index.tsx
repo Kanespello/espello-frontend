@@ -4,22 +4,24 @@ import Answer from "./Answer";
 import React, { FC, SetStateAction, useState } from "react";
 import { InterviewerResponse } from "../../../../model/InterviewerResponse";
 import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
-import { SERVICE_URL_PYTHON } from "../../../../util/AppConstants";
+import { SERVICE_URL_PYTHON, SPEAKER_LAST_TEXT } from "../../../../util/AppConstants";
 import Disclaimer from "./Disclaimer";
 import { SessionTranscript } from "../../../../model/SessionTranscript";
 import { Transcript } from "../../../../model/Transcript";
 import { Role } from "../../../../model/Role";
+import { ConversationTurn } from "../../../../model/ConversationTurn";
 
 export interface ChatContainerProps {
     timerOut: boolean;
-    threadId: string;
+    session_id: string;
     conversationContext: ConversationTurnContextModel;
     sessionTranscript: SessionTranscript;
-    setSessionTranscript : React.Dispatch<SetStateAction<SessionTranscript>>
+    setSessionTranscript: React.Dispatch<SetStateAction<SessionTranscript>>;
+    setIsRateBoxVisible: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const ChatContainer: FC<ChatContainerProps> = ({ timerOut, threadId, conversationContext,sessionTranscript,setSessionTranscript }) => {
-    
+const ChatContainer: FC<ChatContainerProps> = ({ timerOut, session_id, conversationContext, sessionTranscript, setIsRateBoxVisible, setSessionTranscript }) => {
+
     const [interviewerText, setInterviewerText] = useState<string>('');
     const [isDialogVisible, setIsDialogVisible] = useState<boolean>(true);
 
@@ -37,13 +39,14 @@ const ChatContainer: FC<ChatContainerProps> = ({ timerOut, threadId, conversatio
 
     const sendIntervieweeResponse = async (intervieweeText: string) => {
 
+        conversationContext?.changeConversationTurn(ConversationTurn.WAITING);
         //adding session transcript for interviewee
         addSessionTranscript(Role.INTERVIEWEE, intervieweeText);
 
         const url = `${SERVICE_URL_PYTHON}/process_text`;
         const data = {
             message: intervieweeText,
-            thread_id: threadId
+            session_id: session_id
         };
 
         try {
@@ -80,8 +83,8 @@ const ChatContainer: FC<ChatContainerProps> = ({ timerOut, threadId, conversatio
                 <React.Fragment>
                     <Question
                         interviewerText={interviewerText}
-                        setInterviewerText={setInterviewerText}
                         conversationContext={conversationContext}
+                        setIsRateBoxVisible={setIsRateBoxVisible}
                     />
                     <Loader
                         conversationContext={conversationContext} />

@@ -1,0 +1,17 @@
+
+.session-summary-inner-summary-main-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.session-summery-inner-summary-main-left-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+  

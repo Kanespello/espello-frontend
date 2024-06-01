@@ -23,29 +23,27 @@ const GoogleComponent = () => {
                 redirect: 'manual'
             });
 
+            const result = await res.json();
+
             if (res.status == 0 || res.ok) {
-               // Decode the token to get user information
-               const user = jwtDecode(token);
-            
-               // Encrypt user information
-               const userEncrypted = CryptoJS.AES.encrypt(JSON.stringify(user), SESSION_SECRET_KEY as string).toString();
 
-               // Store encrypted user information in local storage
-               localStorage.setItem(USER_SESSION_KEY as string, userEncrypted);
+                login({
+                    user: jwtDecode(token),
+                    user_id: result.user_id
+                })
 
-               //update User
-               login(user)
-
-               // Navigate to the homepage
-               navigate('/');
+                // Navigate to the homepage
+                navigate('/session/create-session');
             }
             else {
                 console.error('Error login in loggin from google');
+                navigate('/');
             }
 
             // Handle the response from your server
         } catch (error) {
             console.error('Error verifying token:', error);
+            navigate('/');
         }
     };
 
