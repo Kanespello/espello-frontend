@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
 import { ConversationTurn } from "../../../../model/ConversationTurn";
 import ChatHeaderTimer from "./ChatHeaderTimer";
-import { SessionTranscript } from "../../../../model/SessionTranscript";
 
 interface ChatHeaderProps {
     conversationContext: ConversationTurnContextModel
@@ -10,7 +9,7 @@ interface ChatHeaderProps {
     setIsRateBoxVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ChatHeader: FC<ChatHeaderProps> = ({ conversationContext, setTimerOut,setIsRateBoxVisible: setExitSessionFlag }) => {
+const ChatHeader: FC<ChatHeaderProps> = ({ conversationContext, setTimerOut, setIsRateBoxVisible: setExitSessionFlag }) => {
 
     return (
         <div className="chat-bot-container-header">
@@ -31,13 +30,13 @@ const ChatHeader: FC<ChatHeaderProps> = ({ conversationContext, setTimerOut,setI
                     <div className="chat-bot-container-header-main-right-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                             fill="none">
-                            <path d="M11.4988 11.5012L4.49728 4.49963" stroke="#6E6E6E" strokeWidth="1.00189"
+                            <path d="M11.4988 11.5012L4.49728 4.49963" strokeWidth="1.00189"
                                 strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M11.4988 4.49963L4.49728 11.5012" stroke="#6E6E6E" strokeWidth="1.00189"
+                            <path d="M11.4988 4.49963L4.49728 11.5012" strokeWidth="1.00189"
                                 strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </div>
-                    <div className="chat-bot-container-header-main-right-content" onClick={()=>setExitSessionFlag(true)}>
+                    <div className="chat-bot-container-header-main-right-content" onClick={() => setExitSessionFlag(true)}>
                         Exit Interview
                     </div>
                 </div>

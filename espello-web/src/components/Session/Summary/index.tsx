@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AnalysisParam, SessionAnalysis } from "../../../model/SessionAnalysis"
 import GraphCircle from "./GraphCircle"
 import './index.css'
-import { DownloadLogo, calculateSummaryRating, sessionAnalysis } from "./util"
+import { DownloadLogo, calculateSummaryRating } from "./util"
 
 
 export interface SummaryProps {
@@ -17,7 +17,7 @@ const Summary: React.FC<SummaryProps> = ({ sessionAnalysis }) => {
 
         const tempAnalysisParams = sessionAnalysis?.analysisParams;
 
-        if (tempAnalysisParams.length > 0) {
+        if (tempAnalysisParams !== null && tempAnalysisParams && tempAnalysisParams.length > 0) {
             setAnalysisParams(tempAnalysisParams)
             setLoading(false)
         }
@@ -47,10 +47,8 @@ const Summary: React.FC<SummaryProps> = ({ sessionAnalysis }) => {
                             <div className="session-summary-inner-summary-main-inner-inner">
                                 <GraphCircle value={calculateSummaryRating(analysisParams)} />
                                 <div className="session-summary-inner-summary-main-right">
-                                    <div className="session-summary-inner-summary-main-right-heading">Case summary</div>
-                                    <div className="session-summary-inner-summary-main-right-content">{
-                                        analysisParams.map((data) => <span>{data?.analysisDetailTuple?.analysisParamDesc + " "}</span>)
-                                    } </div>
+                                    <div className="session-summary-inner-summary-main-right-heading">{sessionAnalysis?.caseTitle}</div>
+                                    <div className="session-summary-inner-summary-main-right-content">{sessionAnalysis?.summary} </div>
                                 </div>
                             </div>
                         </div>

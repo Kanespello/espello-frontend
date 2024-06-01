@@ -21,46 +21,43 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
 
     useEffect(() => {
         if (!recognition) return;
+        recognition.lang = 'en-US';
+        recognition.continuous = true;
+        recognition.interimResults = true;
 
-        if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE) {
-            recognition.lang = 'en-US';
-            recognition.continuous = true;
-            recognition.interimResults = true;
+        recognition.onstart = () => {
+            console.info("Speech recognition started.");
+            setUserTranscript('');
+        };
 
-            recognition.onstart = () => {
-                console.info("Speech recognition started.");
-                setUserTranscript('');
-            };
+        recognition.onresult = (event) => {
+            let interimTranscript = '';
+            for (let i = 0; i < event.results.length; i++) {
+                interimTranscript += ' ' + event.results[i][0].transcript;
+            }
+            setUserTranscript(interimTranscript);
+        };
 
-            recognition.onresult = (event) => {
-                let interimTranscript = '';
-                for (let i = 0; i < event.results.length; i++) {
-                    interimTranscript += ' ' + event.results[i][0].transcript;
-                }
-                setUserTranscript(interimTranscript);
-            };
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            setIsUserSpeaking(false);
+        };
 
-            recognition.onerror = (event) => {
-                console.error('Speech recognition error:', event.error);
-                setIsUserSpeaking(false);
-            };
+        recognition.onend = () => {
+            console.info("Speech recognition ended.");
+            setIsUserSpeaking(false);
+            if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE) {
+                recognition.start();
+                setIsUserSpeaking(true);
+            }
+            else {
+                recognition.stop();
+            }
+        };
 
-            recognition.onend = () => {
-                console.info("Speech recognition ended.");
-                setIsUserSpeaking(false);
-                if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE) {
-                    recognition.start();
-                    setIsUserSpeaking(true);
-                }
-               else{
-                    recognition.stop();
-                }
-            };
-        }
 
         return () => {
             recognition.abort();
-            recognition.stop();
         };
     }, [recognition, conversationContext?.conversationTurn]);
 

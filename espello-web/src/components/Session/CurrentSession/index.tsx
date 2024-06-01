@@ -12,7 +12,6 @@ import Rate from '../Rate';
 import { exitConversation, fetchThread, validateSessionId } from './util';
 import { SessionAnalysis } from '../../../model/SessionAnalysis';
 import Summary from '../Summary';
-import { useAuth } from '../../Account/AuthContext';
 
 const initialConversationTurn: ConversationTurnContextModel = {
     conversationTurn: ConversationTurn.WAITING,
@@ -35,10 +34,7 @@ const CurrentSession = () => {
     const navigate = useNavigate();
 
     const [sessionTranscript, setSessionTranscript] = useState<SessionTranscript>({ transcript: [{ role: Role.SPEAKER, text: SPEAKER_INITIAL_TEXT }] });
-    const [sessionAnalysis, setSessionAnalysis] = useState<SessionAnalysis>({
-        sessionId: sessionId as string,
-        analysisParams: []
-    })
+    const [sessionAnalysis, setSessionAnalysis] = useState<SessionAnalysis>({ ...{} as SessionAnalysis, sessionId: sessionId as string })
     const [conversationTurn, setConversationTurn] = useState<ConversationTurn>(ConversationTurn.IDLE);
 
     const changeConversationTurn = (turn: ConversationTurn) => {
@@ -94,17 +90,17 @@ const CurrentSession = () => {
                         timerOut={timerOut}
                         conversationContext={{ conversationTurn, changeConversationTurn } as ConversationTurnContextModel}
                         sessionTranscript={sessionTranscript}
-                        session_id = {sessionId}
+                        session_id={sessionId}
                         setSessionTranscript={setSessionTranscript}
                         setIsRateBoxVisible={setIsRateBoxVisible}
                     />
                 </div>
             ) : <></>)}
             {(sessionId !== undefined && isRateBoxVisible ? (
-                <Rate sessionId={sessionId} setIsRateBoxVisible={setIsRateBoxVisible} setIsSummaryPageVisible={setIsSummaryPageVisible}/>
+                <Rate sessionId={sessionId} setIsRateBoxVisible={setIsRateBoxVisible} setIsSummaryPageVisible={setIsSummaryPageVisible} />
             ) : <></>)}
             {(sessionId !== undefined && isSummaryPageVisible ? (
-                <Summary sessionAnalysis={sessionAnalysis}/>
+                <Summary sessionAnalysis={sessionAnalysis} />
             ) : <></>)}
         </React.Fragment>
     )

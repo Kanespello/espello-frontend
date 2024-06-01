@@ -31,10 +31,7 @@ export const fetchThread = async (sessionId: string) => {
 };
 
 export const exitConversation = async (sessionId: string) => {
-    let sessionAnalysis: SessionAnalysis = {
-        sessionId,
-        analysisParams: []
-    };
+    let sessionAnalysis: SessionAnalysis = { ...{} as SessionAnalysis, sessionId: sessionId as string }
 
     try {
         const response: Response = await fetch(`${SERVICE_URL_PYTHON}/analyze_results`, {
@@ -46,17 +43,22 @@ export const exitConversation = async (sessionId: string) => {
             body: JSON.stringify({ session_id: sessionId })
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            sessionAnalysis = {
+                sessionId,
+                analysisParams: result?.analysisParams || [],
+                caseTitle: result?.caseTitle,
+                summary: result?.summary
+            };
+
+            return sessionAnalysis;
+        } else {
+            console.error(result);
+            return sessionAnalysis;
         }
 
-        const result = await response.json();
-        sessionAnalysis = {
-            sessionId,
-            analysisParams: result?.analysisParams || []
-        };
-
-        return sessionAnalysis;
     } catch (error) {
         console.error('Error:', error);
         return sessionAnalysis;

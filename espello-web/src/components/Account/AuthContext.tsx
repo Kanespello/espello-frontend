@@ -56,6 +56,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = (userData: any) => {
     setUser(userData);
     const encryptedUserData = encryptUserData(userData);
+    console.log(userData)
     localStorage.setItem(USER_SESSION_KEY, encryptedUserData);
   };
 
