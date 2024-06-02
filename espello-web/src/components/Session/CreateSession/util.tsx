@@ -31,7 +31,7 @@ export const sessionDetailButtonOptions: ButtonOptions[] = [
             {
                 displayLabel: "strategy",
                 label: "strategy",
-                active: true,
+                active: false,
                 selected: false
             }
         ]
