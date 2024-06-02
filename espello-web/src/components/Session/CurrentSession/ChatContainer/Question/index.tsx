@@ -1,4 +1,4 @@
-import React, { FC, SetStateAction, useEffect, useState } from "react";
+import React, { FC, SetStateAction, useEffect, useRef, useState } from "react";
 import './index.css';
 import { ConversationTurn } from "../../../../../model/ConversationTurn";
 import { ConversationTurnContextModel } from "../../../../../model/ConversationTurnContextModel";
@@ -13,6 +13,7 @@ interface QuestionProps {
 const Question: FC<QuestionProps> = ({ interviewerText, setIsRateBoxVisible, conversationContext }) => {
 
     const [espelloTranscript, setEspelloTranscript] = useState<string>('');
+    const transcriptRef = useRef<HTMLParagraphElement>(null);
 
     const formatTranscript = (transcript: string): string => {
         return transcript
@@ -58,11 +59,16 @@ const Question: FC<QuestionProps> = ({ interviewerText, setIsRateBoxVisible, con
         };
     }, [interviewerText]);
 
+    useEffect(() => {
+        if (transcriptRef.current) {
+            transcriptRef.current.scrollTop = transcriptRef.current.scrollHeight;
+        }
+    }, [espelloTranscript]);
 
     return (
         <div className="chat-bot-container-main-transcript">
-            <div className="chat-bot-container-main-transcript-content">
-                <p dangerouslySetInnerHTML={{ __html: espelloTranscript }} style={{ overflow: "visible" }}></p>
+            <div className="chat-bot-container-main-transcript-content" ref={transcriptRef}>
+                <p dangerouslySetInnerHTML={{ __html: espelloTranscript }}></p>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 export const getPath = (value: number): string => {
     const outerRadius = 39;
-    const innerRadius = 33; // Adjust inner radius as needed
+    const innerRadius = 29; // Adjust inner radius as needed
     const centerX = 39;
     const centerY = 39;
 
@@ -37,10 +37,10 @@ export const getPath = (value: number): string => {
 };
 
 export const getPath2 = (value: number): string => {
-    const outerRadius = 30;
-    const innerRadius = 24; // Adjust inner radius as needed
-    const centerX = 30;
-    const centerY = 30;
+    const outerRadius = 27;
+    const innerRadius = 17; // Adjust inner radius as needed
+    const centerX = 27;
+    const centerY = 27;
 
     const valueRatio = value / 10;
     const angle = valueRatio * 2 * Math.PI;

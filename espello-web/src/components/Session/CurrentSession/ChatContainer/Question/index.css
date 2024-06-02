@@ -17,4 +17,8 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    max-height: 60vh; /* Set a maximum height for scrollbar to appear */
+    overflow-y: auto; /* Enable vertical scrollbar when content exceeds the max height */
+    
 }
+
