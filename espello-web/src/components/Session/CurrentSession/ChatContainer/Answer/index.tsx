@@ -79,7 +79,7 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
             recognition?.start();
             setIsSpeechRecognitionActive(true);
         }
-    }, [conversationContext?.conversationTurn, isSpeechRecognitionActive]);
+    }, [conversationContext?.conversationTurn]);
 
     // Send response when timer runs out
     useEffect(() => {
