@@ -18,7 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={user === null ? <Account /> : <Navigate to="/" replace />} />
+          <Route path="/login" element={user === null ? <Account /> : <Navigate to="/session/create-session" replace />} />
           <Route path="/session/current-session/:sessionId" element={user !== null ? <CurrentSession /> : <Navigate to="/login" replace />} />
           <Route path="/session/create-session"  element={user !== null ? <CreateSession /> : <Navigate to="/login" replace />} />
           <Route path="/user-waitlist" element={<UserWaitlist />} />
