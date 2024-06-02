@@ -9,7 +9,7 @@ import { SessionTranscript } from '../../../model/SessionTranscript';
 import { Role } from '../../../model/Role';
 import { useNavigate, useParams } from 'react-router-dom';
 import Rate from '../Rate';
-import { exitConversation, fetchThread, validateSessionId } from './util';
+import { exitConversation, validateSessionId } from './util';
 import { SessionAnalysis } from '../../../model/SessionAnalysis';
 import Summary from '../Summary';
 
@@ -45,7 +45,6 @@ const CurrentSession = () => {
         const validateAndFetchThread = async () => {
             const validationResult = await validateSessionId(sessionId);
             if (validationResult.status === 'success') {
-                await fetchThread(sessionId as string);
                 setLoading(false); // Set loading to false once the thread is fetched
             } else {
                 console.error(validationResult.errorDescription || 'Invalid session ID, Try creating new session');

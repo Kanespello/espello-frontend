@@ -1,35 +1,6 @@
 import { SessionAnalysis } from "../../../model/SessionAnalysis";
 import { SERVICE_URL_JAVA, SERVICE_URL_PYTHON } from "../../../util/AppConstants";
 
-export const fetchThread = async (sessionId: string) => {
-    try {
-        const response: Response = await fetch(`${SERVICE_URL_PYTHON}/create_thread`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({ session_id: sessionId })
-        });
-
-        if (!response.ok) {
-            console.error(`HTTP error! status: ${response.status}`);
-            return;
-        }
-
-        const result = await response.json();
-        if (result.status === 'success') {
-            console.log(result);
-        } else {
-            console.error(result);
-        }
-
-    } catch (error) {
-        console.error('Error fetching thread:', error);
-        throw error;
-    }
-};
-
 export const exitConversation = async (sessionId: string) => {
     let sessionAnalysis: SessionAnalysis = { ...{} as SessionAnalysis, sessionId: sessionId as string }
 

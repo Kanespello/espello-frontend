@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Account/AuthContext';
-import { SERVICE_URL_JAVA } from '../../../util/AppConstants';
+import { SERVICE_URL_PYTHON } from '../../../util/AppConstants';
 import { details } from './util';
 
 const CreateSession = () => {
@@ -12,8 +12,8 @@ const CreateSession = () => {
     const navigate = useNavigate();
 
     const createSession = async (userId: number) => {
-        const url = `${SERVICE_URL_JAVA}/session/api/v1/createSession`;
-        console.log(userId)
+        const url = `${SERVICE_URL_PYTHON}/save_session_details`;
+    
         const data = {
             "userId": userId,
             "sessionDetails": {
@@ -23,7 +23,7 @@ const CreateSession = () => {
                 "companyType": "start-up"
             }
         };
-
+    
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -32,23 +32,21 @@ const CreateSession = () => {
                 },
                 body: JSON.stringify(data)
             });
-
+    
             const result = await response.json();
-
-            if (result.status === 'success') {
-                console.error(result.data.errorDescription);
-                navigate(`/session/current-session/${result.data.sessionId}`);
+    
+            if (result?.data.status === 'success') {
+                console.log(result.data); // Adjusted logging to `console.log` to log the response data
+                navigate(`/session/current-session/${result?.data.sessionId}`);
             } else {
                 console.error('An unknown error occurred');
-                //TODO: Handle session not created
+                // TODO: Handle session not created
             }
-        }
-        catch (error: any) {
+        } catch (error: any) {
             console.error('Error:', error);
         }
-
-    }
-
+    };
+    
 
     const startSession = async () => {
         console.log(user)

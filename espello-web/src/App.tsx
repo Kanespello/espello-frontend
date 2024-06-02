@@ -9,7 +9,6 @@ import { useAuth } from './components/Account/AuthContext';
 import './App.css';
 import './util/Fonts'
 import CreateSession from './components/Session/CreateSession';
-import Summary from './components/Session/Summary';
 
 function App() {
   const { user } = useAuth();
@@ -26,7 +25,6 @@ function App() {
           <Route path="/*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
-      {/* <Summary/> */}
     </div>
   );
 }
