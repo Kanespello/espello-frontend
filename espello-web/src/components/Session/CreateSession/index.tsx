@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Account/AuthContext';
 import { SERVICE_URL_PYTHON } from '../../../util/AppConstants';
 import { ButtonOptions, sessionDetailButtonOptions } from './util';
+import { PATH_CURRENT_SESSION_WITHOUT_SESSION_ID } from '../../../util/SiteRoutes';
 
 interface SessionDetails {
     role: string;
@@ -47,7 +48,8 @@ const CreateSession = () => {
             const result = await response.json();
             if (result?.data.status === 'success') {
                 console.log(result.data);
-                navigate(`/session/current-session/${result?.data.sessionId}`);
+                console.log(`${PATH_CURRENT_SESSION_WITHOUT_SESSION_ID}/${result?.data.sessionId}`)
+                navigate(`${PATH_CURRENT_SESSION_WITHOUT_SESSION_ID}/${result?.data.sessionId}`);
             } else {
                 console.error('An unknown error occurred');
                 // TODO: Handle session not created

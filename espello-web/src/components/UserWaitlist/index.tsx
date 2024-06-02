@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import './index.css';
 import { API_WAITLIST } from "../../util/AppConstants";
+import { PATH_HOME } from "../../util/SiteRoutes";
 
 const UserWaitlist = () => {
     const [email, setEmail] = useState<string>('');
@@ -15,7 +16,7 @@ const UserWaitlist = () => {
     useEffect(() => {
         if (isSuccess) {
             if (seconds === 0)
-                navigate('/');
+                navigate(PATH_HOME);
 
             const interval = setInterval(() => {
                 // Decrease the number of seconds every second

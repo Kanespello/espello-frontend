@@ -45,78 +45,10 @@
     font-weight: 700;
 }
 
-.user-login-container-inner-left-content-heading1,
-.user-login-container-inner-left-content-heading2 {
+.user-login-container-inner-left-content-heading1{
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-.user-login-container-inner-left-content-heading2 {
-    align-items: flex-start;
-}
-
-.user-login-container-inner-left-content-heading2-1,
-.user-login-container-inner-left-content-heading2-2,
-.user-login-container-inner-left-content-or {
-    font-family: "Exo 2";
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.user-login-container-inner-left-content-or {
-    color: var(--Grey, #6E6E6E);
-    font-style: normal;
-    line-height: normal;
-}
-
-.user-login-container-inner-left-content-heading2-1 {
-    color: var(--Grey, #6E6E6E);
-}
-
-.user-login-container-inner-left-content-heading2-2 {
-    color: var(--Highlight, #FF8371);
-    cursor: pointer;
-}
-
-.user-login-container-inner-left-content-fields {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 434px;
-    gap: 8px;
-}
-
-.user-login-container-inner-left-content-fields-email,
-.user-login-container-inner-left-content-fields-password {
-    display: flex;
-    align-items: center;
-    align-self: stretch;
-    border-bottom: 1px solid var(--Grey, #6E6E6E);
-    background: var(--Dark-Grey, #1D1D1D);
-}
-
-.user-login-container-inner-left-content-fields-email-input,
-.user-login-container-inner-left-content-fields-password-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 16px;
-    flex: 1 0 0;
-    gap: 10px;
-}
-
-.user-login-container-inner-left-content-fields-email-input-content,
-.user-login-container-inner-left-content-fields-password-input-content {
-    color: var(--Grey, #6E6E6E);
-    font-family: "Exo 2";
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 22px;
-    flex: 1 0 0;
-    background: var(--Dark-Grey, #1D1D1D);
-    outline: none;
-    border: none;
 }
 
 .user-login-container-inner-left-content-secondary-buttons {
@@ -124,36 +56,6 @@
     align-items: stretch;
     gap: 8px;
     align-self: stretch;
-}
-
-.user-login-container-inner-left-content-primary-button,
-.user-login-container-inner-left-content-secondary-buttons-google,
-.user-login-container-inner-left-content-secondary-buttons-linkedin {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 16px;
-    flex: 1 0 0;
-    color: var(--Background---Light, #F4EAE7);
-    font-family: "Exo 2";
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.48px;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-
-.user-login-container-inner-left-content-primary-button {
-    align-self: stretch;
-    background: var(--Highlight, #FF8371);
-}
-
-.user-login-container-inner-left-content-secondary-buttons-google {
-    background: #CB422F;
-}
-
-.user-login-container-inner-left-content-secondary-buttons-linkedin {
-    background: #1675B7;
 }
 
 .user-login-container-inner-right {

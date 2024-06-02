@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { SERVICE_URL_PYTHON } from '../../util/AppConstants';
 import { jwtDecode, JwtPayload } from 'jwt-decode'; // Import JwtPayload from jwt-decode
 import { useAuth } from './AuthContext';
+import { PATH_CREATE_SESSION, PATH_HOME } from '../../util/SiteRoutes';
 
 // Define interface for login parameters
 export interface LoginParams {
@@ -38,23 +39,23 @@ const GoogleComponent = () => {
                     };
                     login(loginParams);
                     // Navigate to the homepage
-                    navigate('/session/create-session');
+                    navigate(PATH_CREATE_SESSION);
                 } else {
                     console.error('User ID not found in the response');
                     // Alert user and redirect to homepage
                     alert('Ahh, you’re interested. Please join the waitlist as we are operating in a closed user group');
-                    navigate('/');
+                    navigate(PATH_HOME);
                 }
             } else {
                 console.error('Error logging in from Google');
                 // Alert user and redirect to homepage
                 alert('Ahh, you’re interested. Please join the waitlist as we are operating in a closed user group');
-                navigate('/');
+                navigate(PATH_HOME);
             }
         } catch (error) {
             console.error('Error verifying token:', error);
             // Redirect to homepage on error
-            navigate('/');
+            navigate(PATH_HOME);
         }
     };
 
@@ -64,13 +65,11 @@ const GoogleComponent = () => {
     };
 
     return (
-        // <div className="user-login-container-inner-left-content-secondary-buttons-google">
         <GoogleLogin
             onSuccess={handleSuccessResponse}
             onError={handleErrorResponse}
             width={320}
         />
-        //   </div>
     );
 };
 

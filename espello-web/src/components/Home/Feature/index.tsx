@@ -1,13 +1,14 @@
 import React from "react";
 import './index.css'
 import { useNavigate } from "react-router-dom";
+import { PATH_USER_WAITLIST } from "../../../util/SiteRoutes";
 
 const FeatureComponent = () => {
 
     const navigate = useNavigate();
 
     const onClickUserWaitlist = () => {
-        navigate('/user-waitlist');
+        navigate(PATH_USER_WAITLIST);
     };
 
     return (

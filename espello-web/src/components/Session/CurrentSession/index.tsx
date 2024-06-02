@@ -12,6 +12,7 @@ import Rate from '../Rate';
 import { exitConversation, validateSessionId } from './util';
 import { SessionAnalysis } from '../../../model/SessionAnalysis';
 import Summary from '../Summary';
+import { PATH_CREATE_SESSION } from '../../../util/SiteRoutes';
 
 const initialConversationTurn: ConversationTurnContextModel = {
     conversationTurn: ConversationTurn.WAITING,
@@ -49,7 +50,7 @@ const CurrentSession = () => {
             } else {
                 console.error(validationResult.errorDescription || 'Invalid session ID, Try creating new session');
                 alert(validationResult.errorDescription || 'Invalid session ID, Try creating new session')
-                navigate("/session/create-session");
+                navigate(PATH_CREATE_SESSION);
             }
         };
 

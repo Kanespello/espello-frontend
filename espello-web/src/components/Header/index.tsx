@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './header.css';
+import './index.css';
+import { PATH_HOME, PATH_USER_WAITLIST } from '../../util/SiteRoutes';
 
 interface HeaderProps {
     scrollToCompnent: () => void
@@ -16,11 +17,11 @@ const Header: FC<HeaderProps> = ({ scrollToCompnent, enableOtherButtons }) => {
     };
 
     const onClickUserWaitlist = () => {
-        navigate('/user-waitlist');
+        navigate(PATH_USER_WAITLIST);
     };
 
     const onClickLogo = () => {
-        navigate('/');
+        navigate(PATH_HOME);
     };
 
     return (<div className="header">
