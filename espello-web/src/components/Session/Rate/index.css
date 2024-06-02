@@ -74,6 +74,7 @@
     background: var(--Black, #121212);
     padding: 4px 8px;
     outline: none;
+    width: 400px;
 }
 
 .rate-container-main {
@@ -103,4 +104,24 @@
     line-height: normal;
     letter-spacing: 0.48px;
     text-transform: uppercase;
+}
+
+.rate-container-feedback-success,
+.rate-container-feedback-error {
+    align-self: stretch;
+    text-align: center;
+    font-family: "Exo 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    gap: 8px;
+}
+
+.rate-container-feedback-success {
+    color: var(--Grey, #6E6E6E);
+}
+
+.rate-container-feedback-error {
+    color: var(--Highlight, #FF8371);
 }
