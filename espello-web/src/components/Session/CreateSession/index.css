@@ -10,7 +10,6 @@
 .container-new-session-inner {
     display: flex;
     width: 1280px;
-    padding: 0px 240px;
     flex-direction: column;
     align-items: center;
     gap: 24px;

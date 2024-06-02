@@ -113,6 +113,7 @@
 }
 
 .chat-bot-container-main {
+    position: relative;
     display: flex;
     padding: 24px 0px;
     flex-direction: column;
@@ -140,8 +141,7 @@
 .chat-bot-container-main-gradiant-dialog-close{
     width: 100%;
     position: absolute;
-    left: 240px;
-    top: 75px;
+    top: 0;
     background: linear-gradient(0deg, rgba(18, 18, 18, 0.00) 0%, #121212 79.72%);
 }
 

@@ -112,18 +112,22 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
 
     // Send interviewee response
     const sendResponse = async () => {
-        try {
-            recognition?.stop();
-            await sendIntervieweeResponse((finalTranscript + interimTranscript));
-            setInterimTranscript('');
-            setFinalTranscript('')
-        } catch (error) {
-            console.error('Error sending interviewee response:', error);
+        if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE) {
+            try {
+                recognition?.stop();
+                await sendIntervieweeResponse((finalTranscript + interimTranscript));
+                setInterimTranscript('');
+                setFinalTranscript('')
+            } catch (error) {
+                console.error('Error sending interviewee response:', error);
+            }
         }
+        else
+            return;
     };
 
     return (
-        <div className="chat-bot-container-main-user">
+        <div className="chat-bot-container-main-user" style={{ opacity: conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE ? "1" : "0.25" }}>
             <div className="chat-bot-container-main-user-field">
                 <textarea
                     ref={textareaRef}
