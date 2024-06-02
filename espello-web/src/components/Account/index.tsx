@@ -3,7 +3,6 @@ import Header from "../Header";
 import './index.css';
 import Register from './Register';
 import Login from './Login';
-import { useAuth } from './AuthContext';
 
 const Account = () => {
 
@@ -13,7 +12,7 @@ const Account = () => {
         setShowLogin(prevState => !prevState);
     };
 
-    
+
 
     return (
         <>

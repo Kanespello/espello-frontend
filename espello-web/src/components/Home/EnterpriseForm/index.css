@@ -211,3 +211,11 @@
 .enterprise-form-message-error {
     color: var(--Highlight, #FF8371);
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--Dark--Grey, #1D1D1D) inset !important; /* Change white to your desired background color */
+    -webkit-text-fill-color: var(--Grey, #6E6E6E) !important; /* Change to your desired text color */
+}

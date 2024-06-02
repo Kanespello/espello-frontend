@@ -35,25 +35,39 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
         return phoneRegex.test(phone);
     };
 
-    const handleSubmit = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        event.preventDefault();
+    const handleSubmit = async (event?: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLInputElement>) => {
+        if (event) {
+            event.preventDefault();
+        }
 
-        const { email, phone, requirements } = formData;
+        const { email, phone } = formData;
+        const errorMessages = [];
 
         if (!isValidEmail(email)) {
-            setMessage({ text: 'Please enter the correct enterprise email address', type: 'error' });
-            return;
+            errorMessages.push('a valid enterprise email address');
         }
 
         if (!isValidPhone(phone)) {
-            setMessage({ text: 'Please enter the correct enterprise phone', type: 'error' });
+            errorMessages.push('a valid enterprise phone number');
+        }
+
+        if (errorMessages.length > 0) {
+            let errorMessage = "Please enter ";
+
+            if (errorMessages.length === 1) {
+                errorMessage += `${errorMessages[0]}.`;
+            } else {
+                errorMessage += `${errorMessages.slice(0, -1).join(', ')} and ${errorMessages.slice(-1)}.`;
+            }
+
+            setMessage({ text: errorMessage, type: 'error' });
             return;
         }
 
         const queryParams = new URLSearchParams({
             email,
             phone,
-            message: requirements,
+            message: formData.requirements,
             isEnterprise: "true"
         }).toString();
 
@@ -88,6 +102,12 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
         }));
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleSubmit(e);
+        }
+    };
+
     return (
         <div className='enterprise-form' ref={targetRef}>
             <div className='enterprise-form-1'>
@@ -111,6 +131,7 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
                                     placeholder='work email*'
                                     value={formData.email}
                                     onChange={handleChange}
+                                    onKeyDown={handleKeyDown}
                                 />
                             </div>
                         </div>
@@ -122,6 +143,7 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
                                     placeholder='phone*'
                                     value={formData.phone}
                                     onChange={handleChange}
+                                    onKeyDown={handleKeyDown}
                                 />
                             </div>
                         </div>
@@ -134,6 +156,7 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
                                 placeholder='requirements'
                                 value={formData.requirements}
                                 onChange={handleChange}
+                                onKeyDown={handleKeyDown}
                             />
                         </div>
                     </div>

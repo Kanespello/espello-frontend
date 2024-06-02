@@ -1,8 +1,7 @@
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { SERVICE_URL_PYTHON, SESSION_SECRET_KEY, USER_SESSION_KEY } from "../../util/AppConstants";
+import { SERVICE_URL_PYTHON } from "../../util/AppConstants";
 import { jwtDecode } from "jwt-decode";
-import CryptoJS from 'crypto-js';
 import { useAuth } from "./AuthContext";
 
 const GoogleComponent = () => {
@@ -37,6 +36,7 @@ const GoogleComponent = () => {
             }
             else {
                 console.error('Error login in loggin from google');
+                alert('Ahh, you’re interested. Please join the waitlist as we are operating in a closed user group')
                 navigate('/');
             }
 
