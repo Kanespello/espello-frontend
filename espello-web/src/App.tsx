@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from './components/Home';
 import CurrentSession from "./components/Session/CurrentSession";
@@ -12,6 +12,11 @@ import CreateSession from './components/Session/CreateSession';
 
 function App() {
   const { user } = useAuth();
+
+  useEffect(() => {
+    // Set browser zoom to 90%
+    (document.body.style as any).zoom = "100%";
+  }, []);
 
   return (
     <div className="container">

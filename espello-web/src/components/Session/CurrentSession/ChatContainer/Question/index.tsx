@@ -12,9 +12,10 @@ interface QuestionProps {
 
 const Question: FC<QuestionProps> = ({ interviewerText, setIsRateBoxVisible, conversationContext }) => {
 
-    const [espelloTranscript, setEspelloTranscript] = useState<string>('');
+    const [transcriptHTML, setTranscriptHTML] = useState<string>('');
     const transcriptRef = useRef<HTMLParagraphElement>(null);
 
+    // Formats the transcript text with HTML markup for styling
     const formatTranscript = (transcript: string): string => {
         return transcript
             .replace(/\*\*(.*?)\*\*/g, '<i><strong>$1</strong></i>') // Bold the text between **
@@ -22,53 +23,65 @@ const Question: FC<QuestionProps> = ({ interviewerText, setIsRateBoxVisible, con
             .replace(/\n/g, '<br>'); // Ensure newlines are converted to <br> tags
     };
 
-    const speakSynthesizer = (transcript: string): void => {
+    // Speaks the interviewer text using speech synthesis
+    const speakInterviewerText = (text: string): void => {
         conversationContext?.changeConversationTurn(ConversationTurn.INTERVIEWER);
 
-        const utterance: SpeechSynthesisUtterance = new window.SpeechSynthesisUtterance(transcript);
+        const utterance: SpeechSynthesisUtterance = new window.SpeechSynthesisUtterance(text);
         utterance.lang = 'en-US';
-        utterance.rate = 0.8;
+        utterance.rate = 1;
 
+        // Callback function when each word is spoken
         utterance.onboundary = (event: SpeechSynthesisEvent): void => {
-            const spokenWord: string = transcript.slice(0, event.charIndex + event.charLength);
-            const formattedSpokenWord = formatTranscript(spokenWord);
-            setEspelloTranscript(formattedSpokenWord);
+            const spokenText: string = text.slice(0, event.charIndex + event.charLength);
+            const formattedSpokenText = formatTranscript(spokenText);
+            setTranscriptHTML(formattedSpokenText);
 
-            //Check for interview closer
-            const isLastMessageFromInterviewer = formattedSpokenWord.includes(SPEAKER_LAST_TEXT)
+            // Check if it's the last message from the interviewer
+            const isLastMessageFromInterviewer = formattedSpokenText.includes(SPEAKER_LAST_TEXT)
 
-            if (isLastMessageFromInterviewer)
+            if (isLastMessageFromInterviewer) {
+                // Show rate box after 3 seconds if it's the last message
                 setTimeout(() => {
-                    setIsRateBoxVisible(true)
-                }, 3000)
+                    setIsRateBoxVisible(true);
+                }, 3000);
+            }
         };
 
+        // Callback function when speech synthesis ends
         utterance.onend = () => {
             conversationContext?.changeConversationTurn(ConversationTurn.INTERVIEWEE);
         };
 
+        // Start speech synthesis
         window.speechSynthesis.speak(utterance);
     };
 
     useEffect(() => {
-        if (interviewerText.length > 0)
-            speakSynthesizer(interviewerText);
+        // Speak the interviewer text when it changes
+        if (interviewerText.length > 0) {
+            speakInterviewerText(interviewerText);
+        }
 
+        // Cleanup function
         return () => {
+            // Cancel speech synthesis when component unmounts
             window.speechSynthesis.cancel();
         };
     }, [interviewerText]);
 
     useEffect(() => {
+        // Scroll to the bottom of the transcript when it updates
         if (transcriptRef.current) {
             transcriptRef.current.scrollTop = transcriptRef.current.scrollHeight;
         }
-    }, [espelloTranscript]);
+    }, [transcriptHTML]);
 
     return (
         <div className="chat-bot-container-main-transcript">
             <div className="chat-bot-container-main-transcript-content" ref={transcriptRef}>
-                <p dangerouslySetInnerHTML={{ __html: espelloTranscript }}></p>
+                {/* Render the transcript with HTML markup */}
+                <p dangerouslySetInnerHTML={{ __html: transcriptHTML }}></p>
             </div>
         </div>
     );
