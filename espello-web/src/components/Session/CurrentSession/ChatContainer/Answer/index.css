@@ -25,6 +25,7 @@
     align-items: center;
     gap: 10px;
     background: #FF8371;
+    cursor: pointer;
 }
 
 .chat-bot-container-main-user-field-input {
@@ -58,5 +59,4 @@
     line-height: normal;
     letter-spacing: 0.48px;
     text-transform: uppercase;
-    cursor: pointer;
 }

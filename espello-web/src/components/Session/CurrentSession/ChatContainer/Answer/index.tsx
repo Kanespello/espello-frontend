@@ -12,20 +12,25 @@ export interface AnswerProps {
 const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversationContext }) => {
     const [interimTranscript, setInterimTranscript] = useState<string>('');
     const [finalTranscript, setFinalTranscript] = useState<string>('');
-    const [isListening, setIsListening] = useState<boolean>(false);
+    const [isSpeechRecognitionActive, setIsSpeechRecognitionActive] = useState<boolean>(false);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+    // Initialize SpeechRecognition
     const recognition = useMemo(() => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         return new SpeechRecognition();
     }, []);
 
+    // Initialize SpeechRecognition and event listeners
     useEffect(() => {
         if (!recognition) return;
+
+        // Configure SpeechRecognition
         recognition.lang = 'en-US';
         recognition.continuous = true;
         recognition.interimResults = true;
 
+        // Event listeners for SpeechRecognition
         recognition.onstart = () => {
             console.info("Speech recognition started.");
         };
@@ -44,15 +49,15 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
 
         recognition.onerror = (event) => {
             console.error('Speech recognition error:', event.error);
-            setIsListening(false);
+            setIsSpeechRecognitionActive(false);
         };
 
         recognition.onend = () => {
             console.info("Speech recognition ended.");
-            setIsListening(false);
+            setIsSpeechRecognitionActive(false);
             if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE) {
                 recognition.start();
-                setIsListening(true);
+                setIsSpeechRecognitionActive(true);
             } else {
                 recognition.stop();
             }
@@ -63,23 +68,49 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
         };
     }, [recognition, conversationContext?.conversationTurn]);
 
-    const onChangeTranscript = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    // Update transcript on textarea change
+    const handleTranscriptChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setFinalTranscript(event.target.value);
     };
 
+    // Start SpeechRecognition when conversation turn is INTERVIEWEE and not already active
     useEffect(() => {
-        if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE && !isListening) {
+        if (conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE && !isSpeechRecognitionActive) {
             recognition?.start();
-            setIsListening(true);
+            setIsSpeechRecognitionActive(true);
         }
-    }, [conversationContext?.conversationTurn]);
+    }, [conversationContext?.conversationTurn, isSpeechRecognitionActive]);
 
+    // Send response when timer runs out
     useEffect(() => {
         if (timerOut) {
             sendResponse();
         }
     }, [timerOut]);
 
+    // Auto-scroll textarea to bottom
+    useEffect(() => {
+        if (textareaRef.current) {
+            textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
+        }
+    }, [interimTranscript]);
+
+    // Listen for Enter key press to send response
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendResponse();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [finalTranscript, interimTranscript]);
+
+    // Send interviewee response
     const sendResponse = async () => {
         try {
             recognition?.stop();
@@ -91,12 +122,6 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
         }
     };
 
-    useEffect(() => {
-        if (textareaRef.current) {
-            textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
-        }
-    }, [interimTranscript]);
-
     return (
         <div className="chat-bot-container-main-user">
             <div className="chat-bot-container-main-user-field">
@@ -104,7 +129,7 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
                     ref={textareaRef}
                     className="chat-bot-container-main-user-field-input"
                     value={conversationContext?.conversationTurn === ConversationTurn.INTERVIEWEE ? (finalTranscript + interimTranscript) : ""}
-                    onChange={onChangeTranscript}
+                    onChange={handleTranscriptChange}
                     rows={2}
                     disabled={conversationContext?.conversationTurn === ConversationTurn.INTERVIEWER}
                 />
