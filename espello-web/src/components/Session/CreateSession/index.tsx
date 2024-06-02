@@ -6,7 +6,7 @@ import { SERVICE_URL_PYTHON } from '../../../util/AppConstants';
 import { ButtonOptions, sessionDetailButtonOptions } from './util';
 import { PATH_CURRENT_SESSION_WITHOUT_SESSION_ID } from '../../../util/SiteRoutes';
 
-interface SessionDetails {
+export interface SessionDetails {
     role: string;
     mode: string;
     industry: string;

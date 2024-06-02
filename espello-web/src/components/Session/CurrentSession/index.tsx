@@ -13,6 +13,7 @@ import { exitConversation, validateSessionId } from './util';
 import { SessionAnalysis } from '../../../model/SessionAnalysis';
 import Summary from '../Summary';
 import { PATH_CREATE_SESSION } from '../../../util/SiteRoutes';
+import { SessionDetails } from '../CreateSession';
 
 const initialConversationTurn: ConversationTurnContextModel = {
     conversationTurn: ConversationTurn.WAITING,
@@ -37,6 +38,7 @@ const CurrentSession = () => {
     const [sessionTranscript, setSessionTranscript] = useState<SessionTranscript>({ transcript: [{ role: Role.SPEAKER, text: SPEAKER_INITIAL_TEXT }] });
     const [sessionAnalysis, setSessionAnalysis] = useState<SessionAnalysis>({ ...{} as SessionAnalysis, sessionId: sessionId as string })
     const [conversationTurn, setConversationTurn] = useState<ConversationTurn>(ConversationTurn.IDLE);
+    const [sessionDetails, setSessionDetails] = useState<SessionDetails>({} as SessionDetails);
 
     const changeConversationTurn = (turn: ConversationTurn) => {
         setConversationTurn(turn);
@@ -47,6 +49,7 @@ const CurrentSession = () => {
             const validationResult = await validateSessionId(sessionId);
             if (validationResult.status === 'success') {
                 setLoading(false); // Set loading to false once the thread is fetched
+                setSessionDetails(validationResult?.data?.sessionDetails)
             } else {
                 console.error(validationResult.errorDescription || 'Invalid session ID, Try creating new session');
                 alert(validationResult.errorDescription || 'Invalid session ID, Try creating new session')
@@ -85,6 +88,7 @@ const CurrentSession = () => {
                         conversationContext={{ conversationTurn, changeConversationTurn } as ConversationTurnContextModel}
                         setTimerOut={setTimerOut}
                         setIsRateBoxVisible={setIsRateBoxVisible}
+                        sessionDetails={sessionDetails}
                     />
                     <ChatContainer
                         timerOut={timerOut}

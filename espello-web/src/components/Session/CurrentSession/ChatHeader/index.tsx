@@ -2,21 +2,23 @@ import React, { FC } from "react";
 import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
 import { ConversationTurn } from "../../../../model/ConversationTurn";
 import ChatHeaderTimer from "./ChatHeaderTimer";
+import { SessionDetails } from "../../CreateSession";
 
 interface ChatHeaderProps {
-    conversationContext: ConversationTurnContextModel
+    conversationContext: ConversationTurnContextModel;
+    sessionDetails: SessionDetails;
     setTimerOut: React.Dispatch<React.SetStateAction<boolean>>;
     setIsRateBoxVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ChatHeader: FC<ChatHeaderProps> = ({ conversationContext, setTimerOut, setIsRateBoxVisible: setExitSessionFlag }) => {
+const ChatHeader: FC<ChatHeaderProps> = ({ conversationContext, sessionDetails, setTimerOut, setIsRateBoxVisible: setExitSessionFlag }) => {
 
     return (
         <div className="chat-bot-container-header">
             <div className="chat-bot-container-header-main">
                 <div className="chat-bot-container-header-main-left">
                     <div className="chat-bot-container-header-main-left-content">
-                        Session - Interview
+                        {`Session - ${sessionDetails?.role} Interview`}
                     </div>
                 </div>
                 {
