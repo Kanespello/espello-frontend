@@ -11,7 +11,7 @@ import './util/Fonts'
 import CreateSession from './components/Session/CreateSession';
 
 function App() {
-  const { user } = useAuth();
+  const { userDetails } = useAuth();
 
   useEffect(() => {
     // Set browser zoom to 90%
@@ -23,9 +23,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={user === null ? <Account /> : <Navigate to="/session/create-session" replace />} />
-          <Route path="/session/current-session/:sessionId" element={user !== null ? <CurrentSession /> : <Navigate to="/login" replace />} />
-          <Route path="/session/create-session"  element={user !== null ? <CreateSession /> : <Navigate to="/login" replace />} />
+          <Route path="/login" element={userDetails === null ? <Account /> : <Navigate to="/session/create-session" replace />} />
+          <Route path="/session/current-session/:sessionId" element={userDetails !== null ? <CurrentSession /> : <Navigate to="/login" replace />} />
+          <Route path="/session/create-session"  element={userDetails !== null ? <CreateSession /> : <Navigate to="/login" replace />} />
           <Route path="/user-waitlist" element={<UserWaitlist />} />
           <Route path="/*" element={<Navigate to="/" replace />} />
         </Routes>

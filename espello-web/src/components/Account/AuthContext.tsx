@@ -1,16 +1,20 @@
 import React, { createContext, useContext, useState } from 'react';
 import CryptoJS from 'crypto-js';
 import { SESSION_SECRET_KEY, USER_SESSION_KEY } from '../../util/AppConstants';
+import { JwtPayload } from 'jwt-decode';
 
+// Define the type for the authentication context
 interface AuthContextType {
-  user: any
-  login: (user :any) => void;
+  userDetails: LoginParams | null;
+  login: (loginParams: LoginParams) => void;
   logout: () => void;
   isLoggedIn: () => boolean;
 }
 
+// Create the authentication context
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Custom hook to consume the authentication context
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -19,19 +23,28 @@ export const useAuth = (): AuthContextType => {
   return context;
 };
 
+// Props interface for AuthProvider component
 interface AuthProviderProps {
   children: React.ReactNode;
 }
 
-const encryptUserData = (data : any): string => {
+// Define interface for login parameters
+interface LoginParams {
+  user: JwtPayload;
+  user_id: string;
+}
+
+// Function to encrypt user data
+const encryptUserData = (data: LoginParams): string => {
   const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), SESSION_SECRET_KEY).toString();
   return encryptedData;
 };
 
-const decryptUserData = (encryptedData: string):  any => {
+// Function to decrypt user data
+const decryptUserData = (encryptedData: string): LoginParams | null => {
   try {
     const bytes = CryptoJS.AES.decrypt(encryptedData, SESSION_SECRET_KEY);
-    const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+    const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     return decryptedData;
   } catch (error) {
     console.error('Error decrypting user information:', error);
@@ -39,8 +52,10 @@ const decryptUserData = (encryptedData: string):  any => {
   }
 };
 
+// AuthProvider component
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<any | null>(() => {
+  // State to manage user data
+  const [user, setUser] = useState<LoginParams | null>(() => {
     const userEncrypted = localStorage.getItem(USER_SESSION_KEY);
     if (userEncrypted) {
       const decryptedUser = decryptUserData(userEncrypted);
@@ -53,24 +68,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return null;
   });
 
-  const login = (userData: any) => {
+  // Function to login user
+  const login = (userData: LoginParams) => {
     setUser(userData);
     const encryptedUserData = encryptUserData(userData);
-    console.log(userData)
     localStorage.setItem(USER_SESSION_KEY, encryptedUserData);
   };
 
+  // Function to logout user
   const logout = () => {
     setUser(null);
     localStorage.removeItem(USER_SESSION_KEY);
   };
 
+  // Function to check if user is logged in
   const isLoggedIn = () => {
     return !!user;
   };
 
+  // Value for the authentication context
   const authContextValue: AuthContextType = {
-    user,
+    userDetails : user,
     login,
     logout,
     isLoggedIn,

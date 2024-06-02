@@ -89,9 +89,16 @@
     opacity: 0.2;
 }
 
-.option-button{
+.option-button-selected{
     color: var(--Black, #121212);
     background: var(--Highlight, #FF8371);
+    cursor: pointer;
+    opacity: 1;
+}
+
+.option-button-not-selected{
+    border: 1px solid var(--Grey, #6E6E6E);
+    color: var(--Grey, #6E6E6E);
     cursor: pointer;
     opacity: 1;
 }
