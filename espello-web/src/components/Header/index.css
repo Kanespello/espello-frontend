@@ -1,4 +1,4 @@
-.header {
+.header-pc {
     position: fixed;
     display: flex;
     justify-content: space-between;
@@ -7,6 +7,10 @@
     height: 67px;
     border-bottom: 2px solid #1D1D1D;
     background: #121212;
+}
+
+.header-android {
+    display: none;
 }
 
 .header-left {
@@ -65,4 +69,37 @@
     gap: 10px;
     padding: 8px 16px;
     border: none;
+}
+
+@media screen and (max-width: 435px) {
+    .header-pc {
+        display: none;
+    }
+
+    .header-android {
+        max-width: 435px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #1D1D1D;
+        background: rgba(18, 18, 18, 0.60);
+        backdrop-filter: blur(6px);
+    }
+
+    .header-android-left {
+        display: flex;
+        padding: 24px 16px;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 16px;
+        align-self: stretch;
+    }
+
+    .header-android-right {
+        display: flex;
+        padding: 0px 16px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
 }

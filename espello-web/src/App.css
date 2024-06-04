@@ -2,13 +2,26 @@ body{
     background: #121212;
     box-sizing: border-box;
 }
-.container{
-    width: 1280px;
-    margin: 0 auto;
+
+#root{
+    width: 100%;
 }
 
 ::selection {
     background: #FF8371;
     color: #F4EAE7;
-  }
+}
+
+.container{
+    width: 1280px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 400px) {
+    .container{
+        max-width: 400px;
+    }
+}
+
+
 

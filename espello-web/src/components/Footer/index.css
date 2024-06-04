@@ -1,58 +1,95 @@
 .footer {
     display: flex;
-    width: 1280px;
+    width: 1200px;
+    padding: 0px 40px;
     justify-content: space-between;
     align-items: center;
     background: var(--Dark-Grey, #1D1D1D);
 }
 
-.footer-left,
-.footer-right {
-    color: var(--Background---Light, #F4EAE7);
+.footer-left {
+    color: var(--Grey, #6E6E6E);
     text-align: center;
+    font-family: Raleway;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding: 0 40px;
-}
-
-.footer-left {
-    font-family: Raleway;
-}
-
-.footer-right {
-    font-family: "Exo 2";
 }
 
 .footer-center {
-    display: flex;
-    padding: 24px 40px;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 16px;
-    align-self: stretch;
-}
-
-.footer-center-icon {
     width: 36px;
     height: 31.685px;
+    padding: 24px 40px;
 }
 
-.footer-center-content {
-    color: var(--Highlight, #FF8371);
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.footer-center path {
+    fill: var(--Grey, #6E6E6E);
+}
+
+.footer-center path:hover {
+    fill: var(--Highlight, #FF8371);
+}
+
+.footer-right-contact {
+    color: var(--Grey, #6E6E6E);
     text-align: center;
-    font-family: Raleway;
+    font-family: "Exo 2";
     font-size: 16px;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 400;
     line-height: normal;
-    letter-spacing: 1.28px;
-    text-transform: uppercase;
 }
 
-.footer-right:hover {
+.footer-right-mail {
+    color: var(--Background---Light, #F4EAE7);
+    text-align: center;
+    font-family: "Exo 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.footer-right-mail:hover {
     color: var(--Highlight, #FF8371);
     cursor: pointer;
+}
+
+@media screen and (max-width: 435px) {
+    .footer {
+        max-width: calc(435px - 32px);
+        padding: 16px;
+    }
+
+    .footer-left {
+        font-size: 8px;
+    }
+
+    .footer-center {
+        width: 18px;
+        height: 15px;
+        padding: 24px;
+    }
+
+    .footer-center path {
+        fill: var(--Grey, #6E6E6E);
+    }
+
+    .footer-center path:hover {
+        fill: var(--Highlight, #FF8371);
+    }
+
+    .footer-right-contact ,
+    .footer-right-mail {
+        font-size: 8px;
+    }
 }

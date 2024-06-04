@@ -1,14 +1,12 @@
-.box-2 {
+.box-3 {
     display: flex;
-    width: 1280px;
-    padding: 120px 0px;
     flex-direction: column;
     align-items: center;
     gap: 80px;
     background: var(--Black, #121212);
 }
 
-.box-2-media {
+.box-3-media {
     display: flex;
     padding: 0px 40px;
     align-items: center;
@@ -16,7 +14,7 @@
     align-self: stretch;
 }
 
-.box-2-media-left {
+.box-3-media-left {
     display: flex;
     height: 328px;
     flex-direction: column;
@@ -27,7 +25,7 @@
     border: 1px solid var(--Grey, #6E6E6E);
 }
 
-.box-2-media-right {
+.box-3-media-right {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +34,7 @@
     flex: 1 0 0;
 }
 
-.box-2-media-right-heading {
+.box-3-media-right-heading {
     align-self: stretch;
     color: var(--Background---Light, #F4EAE7);
     font-family: Raleway;
@@ -47,7 +45,7 @@
     text-transform: uppercase;
 }
 
-.box-2-media-right-content {
+.box-3-media-right-content {
     align-self: stretch;
     color: var(--Grey, #6E6E6E);
     font-family: "Exo 2";
@@ -57,7 +55,7 @@
     line-height: normal;
 }
 
-.box-2-content-1 {
+.box-3-content-1 {
     display: flex;
     padding: 40px;
     align-items: center;
@@ -66,7 +64,7 @@
     background: var(--Highlight, #FF8371);
 }
 
-.box-2-content-2 {
+.box-3-content-2 {
     display: flex;
     padding: 40px;
     align-items: center;
@@ -74,7 +72,7 @@
     align-self: stretch;
 }
 
-.box-2-content-3 {
+.box-3-content-3 {
     display: flex;
     padding: 40px;
     flex-direction: column;
@@ -84,9 +82,9 @@
     align-self: stretch;
 }
 
-.box-2-content-1-3-1,
-.box-2-content-1-3-2,
-.box-2-content-1-3-3 {
+.box-3-content-1-3-1,
+.box-3-content-1-3-2,
+.box-3-content-1-3-3 {
     align-self: stretch;
     color: var(--Black, #121212);
     font-family: "Exo 2";
@@ -96,10 +94,19 @@
     line-height: normal;
     letter-spacing: 1.28px;
     text-transform: uppercase;
+
+    color: var(--Black, #121212);
+    font-family: "Exo 2";
+
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    text-transform: uppercase;
 }
 
-.box-2-content-1-1,
-.box-2-content-1-3 {
+.box-3-content-1-1,
+.box-3-content-1-3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -108,13 +115,13 @@
     flex: 1 0 0;
 }
 
-.box-2-content-1-2 {
+.box-3-content-1-2 {
     width: 1px;
     height: 120px;
     background: #121212;
 }
 
-.box-2-content-1-1-1 {
+.box-3-content-1-1-1 {
     color: var(--Black, #121212);
     font-family: Times;
     font-size: 40px;
@@ -123,7 +130,7 @@
     line-height: normal;
 }
 
-.box-2-content-1-1-2 {
+.box-3-content-1-1-2 {
     color: var(--Black, #121212);
     font-family: Raleway;
     font-size: 56px;
@@ -133,7 +140,7 @@
     text-transform: uppercase;
 }
 
-.box-2-content-2-1 {
+.box-3-content-2-1 {
     flex: 1 0 0;
     color: var(--Background---Light, #F4EAE7);
     font-family: Raleway;
@@ -144,7 +151,7 @@
     text-transform: uppercase;
 }
 
-.box-2-content-2-2 {
+.box-3-content-2-2 {
     display: flex;
     height: 165px;
     flex-direction: column;
@@ -152,14 +159,14 @@
     gap: 10px;
 }
 
-.box-2-content-2-2-1,
-.box-2-content-2-2-3 {
+.box-3-content-2-2-1,
+.box-3-content-2-2-3 {
     width: 1px;
     height: 64.5px;
     background: #6E6E6E;
 }
 
-.box-2-content-2-2-2 {
+.box-3-content-2-2-2 {
     color: var(--Grey, #6E6E6E);
     font-family: Times;
     font-size: 28px;
@@ -170,7 +177,7 @@
     letter-spacing: 1.12px;
 }
 
-.box-2-content-2-3 {
+.box-3-content-2-3 {
     display: flex;
     padding: 40px;
     flex-direction: column;
@@ -180,7 +187,7 @@
     align-self: stretch;
 }
 
-.box-2-content-2-3-content {
+.box-3-content-2-3-content {
     color: var(--Grey, #6E6E6E);
     font-family: Raleway;
     font-size: 24px;
@@ -191,8 +198,8 @@
     text-transform: uppercase;
 }
 
-.box-2-content-3-1,
-.box-2-content-3-3 {
+.box-3-content-3-1,
+.box-3-content-3-3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -201,7 +208,7 @@
     align-self: stretch;
 }
 
-.box-2-content-3-2 {
+.box-3-content-3-2 {
     display: flex;
     height: 81px;
     justify-content: center;
@@ -210,7 +217,7 @@
     align-self: stretch;
 }
 
-.box-2-content-3-1-1 {
+.box-3-content-3-1-1 {
     color: var(--Grey, #6E6E6E);
     font-family: Times;
     font-size: 28px;
@@ -221,7 +228,7 @@
     letter-spacing: 1.12px;
 }
 
-.box-2-content-3-1-2 {
+.box-3-content-3-1-2 {
     color: var(--Background---Light, #F4EAE7);
     text-align: center;
     font-family: Raleway;
@@ -233,7 +240,7 @@
     align-self: stretch;
 }
 
-.box-2-content-3-2-content {
+.box-3-content-3-2-content {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -244,7 +251,7 @@
     background: var(--Dark-Grey, #1D1D1D);
 }
 
-.box-2-content-3-3-content {
+.box-3-content-3-3-content {
     color: var(--Grey, #6E6E6E);
     text-align: center;
     font-family: "Exo 2";
@@ -256,7 +263,7 @@
     text-transform: uppercase;
 }
 
-.box-2-content-3-2-content-button {
+.box-3-content-3-2-content-button {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -270,4 +277,171 @@
     font-weight: 700;
     line-height: normal;
     letter-spacing: 1.12px;
+}
+
+
+@media screen and (max-width: 435px) {
+    .box-3 {
+        gap: 0;
+        max-width: 435px;
+    }
+
+    .box-3-media {
+        padding: 24px 40px;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    .box-3-media-left {
+        gap: 10px;
+        align-self: stretch;
+    }
+
+    iframe {
+        height: 328px;
+    }
+
+    .box-3-media-right {
+        gap: 8px;
+        align-self: stretch;
+    }
+
+    .box-3-media-right-heading {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .box-3-media-right-heading br{
+        display: none;
+    }
+
+    .box-3-media-right-content {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .box-3-content-1 {
+        padding: 40px 16px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .box-3-content-2 {
+        padding: 40px 16px;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    .box-3-content-3 {
+        padding: 0px 16px;
+        gap: 8px;
+    }
+
+    .box-3-content-1-3-1,
+    .box-3-content-1-3-2,
+    .box-3-content-1-3-3 {
+        font-size: 12px;
+        letter-spacing: 0.96px;
+    }
+
+    .box-3-content-1-1,
+    .box-3-content-1-3 {
+        align-self: stretch;
+        padding: 0;
+    }
+
+    .box-3-content-1-3 {
+        padding: 0 16px;
+    }
+
+    .box-3-content-1-2 {
+        height: 1px;
+        width: 100%;
+    }
+
+    .box-3-content-1-1-1 {
+        font-size: 24px;
+    }
+
+    .box-3-content-1-1-2 {
+        font-size: 42px;
+    }
+
+    .box-3-content-2-1 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .box-3-content-2-2 {
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        align-self: stretch;
+    }
+
+    .box-3-content-2-2-1,
+    .box-3-content-2-2-3 {
+        width: calc(50% - 0.5px);
+        height: 1px;
+    }
+
+    .box-3-content-2-2-2 {
+        font-size: 16px;
+        letter-spacing: 0.64px;
+    }
+
+    .box-3-content-2-3 {
+        padding: 8px 0px;
+        gap: 32px;
+        align-self: stretch;
+    }
+
+    .box-3-content-2-3-content {
+        font-size: 12px;
+        letter-spacing: 0.48px;
+        text-align: center;
+        line-height: 1.25rem;
+    }
+
+    .box-3-content-3-1,
+    .box-3-content-3-3 {
+        gap: 8px;
+    }
+
+    .box-3-content-3-2 {
+        height: auto;
+        gap: 8px;
+    }
+
+    .box-3-content-3-1-1 {
+        font-size: 14px;
+        letter-spacing: 0.56px;
+    }
+
+    .box-3-content-3-1-2 {
+        font-size: 16px;
+    }
+
+    .box-3-content-3-2-content {
+        margin: 8px 0px;
+        border-radius: 0%;
+    }
+
+    .box-3-content-3-3-content {
+        font-size: 8px;
+        letter-spacing: 0.64px;
+    }
+
+    .box-3-content-3-2-content-button {
+        font-size: 16px;
+        letter-spacing: 0.64px;
+        padding: 4px 16px;
+    }
+
 }

@@ -112,8 +112,6 @@ const EnterpriseForm: FC<EnterpriseFormProps> = ({ targetRef }) => {
         <div className='enterprise-form' ref={targetRef}>
             <div className='enterprise-form-1'>
                 <div className='enterprise-form-1-1'>Enterprises</div>
-                <div className='enterprise-form-1-2'></div>
-                <div className='enterprise-form-1-3'></div>
                 <div className='enterprise-form-1-4'>
                     <div className='enterprise-form-1-4-bottom'>
                         <div className='enterprise-form-1-4-bottom-content'>ASSESSMENT TOOL FOR CONSULTING & PRODUCT POSITIONS</div>
