@@ -17,9 +17,9 @@ body{
     margin: 0 auto;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 435px) {
     .container{
-        max-width: 400px;
+        max-width: 435px;
     }
 }
 
