@@ -19,7 +19,7 @@ const FeatureComponent = () => {
                         <div className="box-1-inner-top-inner-top">
                             <div className="box-1-inner-top-inner-top-1">
                                 <div className="box-1-inner-top-inner-top-1-1">
-                                    Supercharge interview prep
+                                    Supercharge interview <br/> prep
                                 </div>
                                 <div className="box-1-inner-top-inner-top-1-2">
                                     <div className="box-1-inner-top-inner-top-1-2-1">

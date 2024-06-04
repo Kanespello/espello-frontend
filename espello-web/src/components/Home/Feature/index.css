@@ -95,6 +95,10 @@
     text-transform: uppercase;
 }
 
+.box-1-inner-top-inner-top-1-1 br {
+    display: none;
+}
+
 .box-1-inner-top-inner-top-1-2 {
     display: flex;
     padding: 0px 16px;
@@ -263,6 +267,10 @@
 
     .box-1-inner-top-inner-top-1-1 {
         font-size: 42px;
+    }
+
+    .box-1-inner-top-inner-top-1-1 br {
+        display: block;
     }
 
     .box-1-inner-top-inner-top-1-2 {
