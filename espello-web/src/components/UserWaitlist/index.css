@@ -1,3 +1,10 @@
+:root {
+    --grey: #6E6E6E;
+    --background-light: #F4EAE7;
+    --highlight: #FF8371;
+    --dark-grey: #1D1D1D;
+}
+
 .user-waitlist-frame-input {
     position: absolute;
     top: 67px;
@@ -10,110 +17,97 @@
     gap: 305px;
 }
 
-.user-waitlist-frame-submit-model {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 60px;
-}
-
-.user-waitlist-frame-submit-model-timer {
-    align-self: stretch;
-    color: var(--Grey, #6E6E6E);
-    text-align: center;
-    font-family: "Exo 2";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.user-waitlist-frame-submit-model-timer-bold {
-    color: var(--Grey, #6E6E6E);
-    font-family: "Exo 2";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-
+.user-waitlist-frame-submit-model,
 .user-waitlist-frame-submit {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.user-waitlist-frame-submit-model {
+    gap: 60px;
+}
+
+.user-waitlist-frame-submit {
     align-items: flex-start;
     gap: 10px;
 }
 
+.user-waitlist-frame-submit-model-timer,
+.user-waitlist-frame-submit-model-timer-bold,
+.user-waitlist-frame-input-content-failure,
+.user-waitlist-frame-input-content-success,
+.user-waitlist-frame-submit-top,
+.user-waitlist-frame-submit-bottom,
+.user-waitlist-frame-input-content-left {
+    font-family: "Exo 2";
+    font-size: 16px;
+    font-style: normal;
+    line-height: normal;
+}
+
+.user-waitlist-frame-submit-model-timer,
+.user-waitlist-frame-submit-model-timer-bold {
+    color: var(--grey);
+    text-align: center;
+}
+
+.user-waitlist-frame-submit-model-timer {
+    font-weight: 400;
+    align-self: stretch;
+}
+
+.user-waitlist-frame-submit-model-timer-bold {
+    font-weight: 700;
+}
+
 .user-waitlist-frame-submit-top {
     width: 694px;
-    color: var(--Background---Light, #F4EAE7);
-    text-align: center;
-    font-family: "Exo 2";
+    color: var(--background-light);
     font-size: 24px;
-    font-style: normal;
     font-weight: 700;
     line-height: 22px;
-    /* 91.667% */
+    text-align: center;
 }
 
 .user-waitlist-frame-submit-bottom {
     align-self: stretch;
-    color: var(--Background---Light, #F4EAE7);
+    color: var(--background-light);
     text-align: center;
-    font-family: "Exo 2";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
 }
 
 .user-waitlist-frame-input-content-top {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid var(--Highlight, #FF8371);
-    background: var(--Dark-Grey, #1D1D1D);
+    border-bottom: 1px solid var(--highlight);
+    background: var(--dark-grey);
     width: 726px;
 }
 
-.user-waitlist-frame-input-content-failure,
-.user-waitlist-frame-input-content-success {
-    font-family: "Exo 2";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    align-self: stretch;
-}
-
 .user-waitlist-frame-input-content-failure {
-    color: var(--Highlight, #FF8371);
+    color: var(--highlight);
 }
 
 .user-waitlist-frame-input-content-success {
-    color: var(--Grey, #6E6E6E);
+    color: var(--grey);
 }
 
 .user-waitlist-frame-input-content-left {
-
     display: flex;
     width: calc(726px - 24px);
     padding: 16px;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    border: none;
-    background: #1D1D1D;
-    opacity: 0px;
-    font-family: Exo 2;
-    font-size: 24px;
+    background: var(--dark-grey);
     font-weight: 700;
     line-height: 22px;
     text-align: left;
-    color: #6E6E6E;
+    color: var(--grey);
     outline: none;
+    border: none;
 }
 
 .user-waitlist-frame-input-content-right {
@@ -130,42 +124,30 @@
 .user-waitlist-frame-input-content-right-button {
     background: none;
     border: none;
-    color: #FF8371;
+    color: var(--highlight);
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px var(--Dark--Grey, #1D1D1D) inset !important; /* Change white to your desired background color */
-    -webkit-text-fill-color: var(--Grey, #6E6E6E) !important; /* Change to your desired text color */
+    -webkit-box-shadow: 0 0 0 30px var(--dark-grey) inset !important;
+    -webkit-text-fill-color: var(--grey) !important;
 }
 
 @media screen and (max-width: 435px) {
-    .user-waitlist-frame-input {
-        max-width: 435px ;
-        width: 100%;
-    }
-    
-    .user-waitlist-frame-submit {
-        max-width: 403px ;
-        width: 100%;
-        padding: 0 16px;
-        align-items: center;
-        justify-content: center;
-    }
-    .user-waitlist-frame-input-content-top {
-        max-width: 403px;
-        width: 100%;
-    }
-    
+    .user-waitlist-frame-input,
+    .user-waitlist-frame-submit,
+    .user-waitlist-frame-input-content-top,
     .user-waitlist-frame-input-content-failure,
     .user-waitlist-frame-input-content-success {
-        max-width: 403px;
+        max-width: 435px;
         width: 100%;
-        align-self: auto;
     }
-    
-   
-    
+
+    .user-waitlist-frame-submit {
+        max-width: 403px;
+        padding: 0 16px;
+        align-items: center;
+    }
 }

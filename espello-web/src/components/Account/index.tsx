@@ -10,7 +10,7 @@ const Account = () => {
 
     return (
         <>
-            <Header scrollToCompnent={() => { }} enableOtherButtons={false} />
+            <Header scrollToComponent={() => { }} enableOtherButtons={false} />
             <Login />
         </>
     );

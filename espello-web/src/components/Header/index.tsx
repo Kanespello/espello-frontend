@@ -4,11 +4,11 @@ import './index.css';
 import { PATH_HOME, PATH_USER_WAITLIST } from '../../util/SiteRoutes';
 
 interface HeaderProps {
-    scrollToCompnent: () => void
+    scrollToComponent: () => void
     enableOtherButtons?: boolean
 }
 
-const Header: FC<HeaderProps> = ({ scrollToCompnent, enableOtherButtons }) => {
+const Header: FC<HeaderProps> = ({ scrollToComponent, enableOtherButtons }) => {
 
     const [isAndroidHeaderCollapsed, setIsAndroidHeaderCollapsed] = useState<boolean>(true);
 
@@ -16,7 +16,7 @@ const Header: FC<HeaderProps> = ({ scrollToCompnent, enableOtherButtons }) => {
 
     const onClickEnterprise = () => {
         setIsAndroidHeaderCollapsed(true)
-        scrollToCompnent();
+        scrollToComponent();
     };
 
     const onClickUserWaitlist = () => {

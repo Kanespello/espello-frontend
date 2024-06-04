@@ -17,7 +17,7 @@ const Home = () => {
 
     return (
         <React.Fragment>
-            <Header scrollToCompnent = {scrollToComponent} enableOtherButtons={true}/>
+            <Header scrollToComponent = {scrollToComponent} enableOtherButtons={true}/>
             <FeatureComponent />
             <WhatWeDo />
             <EnterpriseForm targetRef = {targetRef}/>
