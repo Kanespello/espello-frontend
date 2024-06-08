@@ -28,7 +28,7 @@ const Question: FC<QuestionProps> = ({ interviewerText, setIsRateBoxVisible, con
         conversationContext?.changeConversationTurn(ConversationTurn.INTERVIEWER);
 
         const utterance: SpeechSynthesisUtterance = new window.SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-UK';
+        utterance.lang = 'en-US';
         utterance.rate = 0.9;
         utterance.pitch = 1.2;
 
