@@ -151,3 +151,17 @@ input:-webkit-autofill:active {
         align-items: center;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .user-waitlist-frame-input,
+    .user-waitlist-frame-submit,
+    .user-waitlist-frame-input-content-top,
+    .user-waitlist-frame-input-content-failure,
+    .user-waitlist-frame-input-content-success {
+        max-width: 400px;
+    }
+
+    .user-waitlist-frame-submit {
+        max-width: 368px;
+    }
+}

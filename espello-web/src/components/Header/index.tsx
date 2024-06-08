@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
-import { PATH_HOME, PATH_USER_WAITLIST } from '../../util/SiteRoutes';
+import { PATH_BLOGS, PATH_HOME, PATH_USER_WAITLIST } from '../../util/SiteRoutes';
 
 interface HeaderProps {
     scrollToComponent: () => void
@@ -27,6 +27,10 @@ const Header: FC<HeaderProps> = ({ scrollToComponent, enableOtherButtons }) => {
         navigate(PATH_HOME);
     };
 
+    const onClickBlogs = () => {
+        window.open(PATH_BLOGS, '_blank');
+    };    
+
     return (
         <React.Fragment>
             <div className="header-pc">
@@ -45,7 +49,7 @@ const Header: FC<HeaderProps> = ({ scrollToComponent, enableOtherButtons }) => {
                             <div className="header-right-buttons-enterprise">Enterprises</div>
                         </div>}
                     {enableOtherButtons &&
-                        <div className="header-right-buttons" onClick={() => { }}>
+                        <div className="header-right-buttons" onClick={onClickBlogs}>
                             <div className="header-right-buttons-enterprise">Blogs</div>
                         </div>}
                     {enableOtherButtons &&
@@ -76,7 +80,7 @@ const Header: FC<HeaderProps> = ({ scrollToComponent, enableOtherButtons }) => {
                 <div className='header-android-open-button' onClick={onClickEnterprise}>
                     Enterprises
                 </div>
-                <div className='header-android-open-button' onClick={() => { }}>
+                <div className='header-android-open-button' onClick={onClickBlogs}>
                     Blogs
                 </div>
                 <div className='header-android-open-button' onClick={onClickUserWaitlist}>

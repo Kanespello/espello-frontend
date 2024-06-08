@@ -93,3 +93,9 @@
         font-size: 8px;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .footer {
+        max-width: calc(400px - 32px);
+    }
+}

@@ -445,3 +445,9 @@
     }
 
 }
+
+@media screen and (max-width: 400px) {
+    .box-3 {
+        max-width: 400px;
+    }
+}

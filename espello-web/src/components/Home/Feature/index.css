@@ -345,3 +345,17 @@
         align-self: stretch;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .box-1 {
+        max-width: 400px;
+    }
+
+    .box-1-inner-top {
+        max-width: calc(400px - 80px);
+    }
+
+    .box-2 {
+        max-width: calc(400px - 80px);
+    }
+}
