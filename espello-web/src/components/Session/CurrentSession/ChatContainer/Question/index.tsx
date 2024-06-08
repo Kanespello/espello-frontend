@@ -30,7 +30,7 @@ const Question: FC<QuestionProps> = ({ interviewerText, setIsRateBoxVisible, con
         const utterance: SpeechSynthesisUtterance = new window.SpeechSynthesisUtterance(text);
         utterance.lang = 'en-US';
         utterance.rate = 0.9;
-        utterance.pitch = 1.2;
+        utterance.pitch = 2;
 
         // Callback function when each word is spoken
         utterance.onboundary = (event: SpeechSynthesisEvent): void => {
