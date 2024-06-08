@@ -26,7 +26,7 @@ const Answer: FC<AnswerProps> = ({ timerOut, sendIntervieweeResponse, conversati
         if (!recognition) return;
 
         // Configure SpeechRecognition
-        recognition.lang = 'en-US';
+        // recognition.lang = 'en-US';
         recognition.continuous = true;
         recognition.interimResults = true;
 
