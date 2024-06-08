@@ -101,7 +101,7 @@
 
     .header-android-open-button {
         color: var(--Background---Light, #F4EAE7);
-        padding: 4px 16px;
+        padding: 1rem;
         font-family: Raleway;
         font-size: 24px;
         font-style: normal;
