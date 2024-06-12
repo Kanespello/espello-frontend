@@ -115,9 +115,9 @@
 .chat-bot-container-main {
     position: relative;
     display: flex;
-    padding: 24px 0px;
+    padding: 0;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     gap: 32px;
     flex: 1 0 0;
@@ -146,7 +146,7 @@
 }
 
 .chat-bot-container-main-gradiant-dialog-close{
-    height: 115px;
+    height: 125px;
 }
 .chat-bot-container-main-gradiant-dialog-open{
     height: 100%;

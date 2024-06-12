@@ -6,23 +6,104 @@ interface DisclaimerProps {
     setInterviewerText: React.Dispatch<React.SetStateAction<string>>;
 }
 
+const cardsTop = [
+    {
+        main: "Format:",
+        heading: ["Speak Your Answers"],
+        content: "Respond verbally for clarity and accuracy. Edit your transcribed response using the text box."
+    },
+    {
+        main: "_",
+        heading: ["Single Session"],
+        content: " Due to timed responses and no resume options, please complete the entire interview in one sitting."
+    },
+    {
+        main: "_",
+        heading: ["Timed Responses (90 seconds)"],
+        content: "Your answer will be automatically recorded after the timer ends or when you submit it within 90 seconds."
+    }
+]
+
+const cardsBottom = [
+    {
+        main: "Requirements:",
+        heading: ["Use Google Chrome on PC", "Ensure working microphone", "Ensure stable internet"],
+        content: ""
+    },
+    {
+        main: "General:",
+        heading: ["Sit in a quiet environment", "You’ll get a detailed report after interview"],
+        content: ""
+    },
+    {
+        main: "_",
+        heading: [],
+        content: ""
+    }
+]
+
 const Disclaimer: React.FC<DisclaimerProps> = ({ setIsDialogVisible, setInterviewerText }) => {
     return (
         <div className="chat-bot-container-main-dialog-box">
             <div className="chat-bot-container-main-dialog-box-heading">Instructions</div>
             <div className="chat-bot-container-main-dialog-box-content">
-                <ul>
-                    <li>This video assessment consists of 5 question(s) and should take you 10 minutes to complete, depending on the number of questions you are assigned.</li>
-                    <li>You are required to complete your assessment within a single sitting.</li>
-                    <li>Please upload the right identification documents as mandated (Govt ID etc.)</li>
-                    <li>Once you are presented with your first question, an automated timer starts. You will be given a preparation time of 45 seconds , followed by a recording time limit that may vary for each question.</li>
-                    <li>Remember to keep track of the timer while preparing or recording your response. Should you find yourself ready before the time limit, you can choose to either start recording your responses or to submit them beforehand.</li>
-                </ul>
+                <div className='chat-bot-container-main-dialog-box-content-header'>
+                    Welcome! This is an audio-based mock interview designed to assess your skills for your desired role.
+                </div>
+                <div className='chat-bot-container-main-dialog-box-content-main'>
+                    <div className='chat-bot-container-main-dialog-box-content-main-top'>
+                        <div className='chat-bot-container-main-dialog-box-content-main-top-content'>
+                            {
+                                cardsTop?.map((card) => (
+                                    <div className='chat-bot-container-main-dialog-box-content-main-top-content-box'>
+
+                                        <div className='chat-bot-container-main-dialog-box-content-main-top-heading' style={card.main === '_' ? { color: "var(--Dark-Grey, #1D1D1D)" } : {}}>{card.main}</div>
+                                        <div className='chat-bot-container-main-dialog-box-content-main-top-content-box-heading'>
+                                            <ul>
+                                                {card.heading.map((value) => <li>{value}</li>)}
+                                            </ul>
+                                        </div>
+                                        <div className='chat-bot-container-main-dialog-box-content-main-top-content-box-content'>
+                                            {card.content}
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+                    <div className='chat-bot-container-main-dialog-box-content-main-mid'>
+                        Interview progress is not recoverable if interrupted technically.
+                    </div>
+                    <div className='chat-bot-container-main-dialog-box-content-main-top'>
+                        <div className='chat-bot-container-main-dialog-box-content-main-top-content'>
+                            {
+                                cardsBottom?.map((card) => (
+                                    <div className='chat-bot-container-main-dialog-box-content-main-top-content-box'>
+
+                                        <div className='chat-bot-container-main-dialog-box-content-main-top-heading' style={card.main === '_' ? { color: "var(--Dark-Grey, #1D1D1D)" } : {}}>{card.main}</div>
+                                        <div className='chat-bot-container-main-dialog-box-content-main-top-content-box-heading'>
+                                            <ul>
+                                                {card.heading.map((value) => <li style={value === '_' ? { color: "var(--Dark-Grey, #1D1D1D)" } : {}}>{value}</li>)}
+                                            </ul>
+                                        </div>
+                                        <div className='chat-bot-container-main-dialog-box-content-main-top-content-box-content' style={card.content === '_' ? { color: "var(--Dark-Grey, #1D1D1D)" } : {}}>
+                                            {card.content}
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div className='chat-bot-container-main-dialog-box-content-footer'>
+                    <div className='chat-bot-container-main-dialog-box-content-footer-heading'>We wish you the best of luck!</div>
+                    <div className='chat-bot-container-main-dialog-box-content-footer-content'>Please note: This is a recorded interview. By proceeding, you acknowledge your consent to the recording.</div>
+                </div>
             </div>
             <div className="chat-bot-container-main-dialog-box-button" onClick={() => {
                 setIsDialogVisible(false);
                 setInterviewerText(SPEAKER_INITIAL_TEXT);
-            }}>Got it</div>
+            }}>I understand</div>
         </div>
     )
 }

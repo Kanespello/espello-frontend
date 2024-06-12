@@ -4,7 +4,7 @@ import Answer from "./Answer";
 import React, { FC, SetStateAction, useState } from "react";
 import { InterviewerResponse } from "../../../../model/InterviewerResponse";
 import { ConversationTurnContextModel } from "../../../../model/ConversationTurnContextModel";
-import { SERVICE_URL_PYTHON, SPEAKER_LAST_TEXT } from "../../../../util/AppConstants";
+import { SERVICE_URL_PYTHON } from "../../../../util/AppConstants";
 import Disclaimer from "./Disclaimer";
 import { SessionTranscript } from "../../../../model/SessionTranscript";
 import { Transcript } from "../../../../model/Transcript";
