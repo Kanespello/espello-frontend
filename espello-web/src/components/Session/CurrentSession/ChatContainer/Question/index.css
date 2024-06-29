@@ -13,12 +13,11 @@
     width: 800px;
     color: #6E6E6E;
     font-family: "Exo 2";
-    font-size: 40px;
+    font-size: 25px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 550;
     line-height: normal;
     max-height: 60vh; /* Set a maximum height for scrollbar to appear */
     overflow-y: auto; /* Enable vertical scrollbar when content exceeds the max height */
-    
 }
 
